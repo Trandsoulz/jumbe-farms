@@ -28,15 +28,13 @@ const AdBanners = () => {
         delay: 3000,
         disableOnInteraction: false,
       }}
-      
       modules={[Pagination, Autoplay]}
       spaceBetween={50}
       pagination={{ clickable: true, dynamicBullets: true }}
-      
       className="mySwiper"
     >
       {[...Array(5)].map((key) => (
-        <SwiperSlide>
+        <SwiperSlide key={key}>
           <Image
             key={key}
             src={"/assets/asset-3.jpg"}
