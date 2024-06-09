@@ -49,7 +49,7 @@ const Search = () => {
       <h1 className="text-center md:text-2xl text-base p-8">
         Browse through our popular categories
       </h1>
-      <main className="max-w-[90rem] md:overflow-hidden overflow-x-scroll w-[90%] mx-auto">
+      <main className="max-w-[90rem] md:overflow-hidden overflow-x-scroll w-[90%] mx-auto pb-8">
         <section className="max-w-[90rem] flex gap-10">
           <Link href={"/categories/rice"}>
             <div className="w-[270px]">
