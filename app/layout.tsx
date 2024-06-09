@@ -11,8 +11,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Next 14 template",
-  description: "This is a generated NEXT 14 template",
+  title: "Jumbo Farms",
+  description: "Shop of Jumbo farms",
 };
 
 export default function RootLayout({

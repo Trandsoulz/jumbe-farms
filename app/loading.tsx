@@ -9,10 +9,10 @@ const Loading = () => {
             className="animate-ping rounded-md"
             priority
             // add any svg or image inside here
-            src={`/`}
+            src={`/logo.png`}
             alt="loading..."
-            height={250}
-            width={190}
+            height={150}
+            width={120}
           />
         </div>
       </main>
