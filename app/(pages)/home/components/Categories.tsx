@@ -14,7 +14,7 @@ const Categories = () => {
           href={"/"}
           className="active:scale-90 duration-200 text-primaryColor1"
         >
-          <h1 className="text-sm md:text-base"> View All {">"}</h1>
+          <h1 className="text-sm md:text-base"> View All</h1>
         </Link>
       </div>
 

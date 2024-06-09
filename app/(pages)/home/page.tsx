@@ -18,7 +18,7 @@ const Homepage = () => {
         <Navbar />
       </nav>
 
-      {/* Section 1 [AdBanner] */}
+      {/* Section 1 [AdBanner] || [Categories]*/}
       <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8 flex lg:flex-row flex-col gap-6">
         <div className="w-full md:w-[65%] md:h-[75vh]">
           <AdBanners />
@@ -224,6 +224,7 @@ const Homepage = () => {
         </div>
       </section>
 
+{/* footer section */}
       <footer  className="max-w-[90rem] mx-auto pt-10 lg:pt-16 px-4 lg:px-16 bg-[#f1f3f5]">
         <Footer />
       </footer>

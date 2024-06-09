@@ -6,12 +6,13 @@ import React from "react";
 
 import IMG1 from "@/public/assets/asset-2.jpg";
 import Link from "next/link";
+import Footer from "@/app/components/Footer";
 
 const Search = () => {
   const HandleChange = () => {};
   return (
     <>
-     <nav className="sticky top-0 z-10">
+      <nav className="sticky top-0 z-10">
         <Navbar />
       </nav>
 
@@ -84,6 +85,11 @@ const Search = () => {
           </Link>
         </section>
       </main>
+
+      {/* footer section */}
+      <footer className="max-w-[90rem] mx-auto pt-10 lg:pt-16 px-4 lg:px-16 bg-[#f1f3f5]">
+        <Footer />
+      </footer>
     </>
   );
 };
