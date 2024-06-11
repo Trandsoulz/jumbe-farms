@@ -19,19 +19,19 @@ const Homepage = () => {
       </nav>
 
       {/* Section 1 [AdBanner] || [Categories]*/}
-      <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8 flex lg:flex-row flex-col gap-6">
-        <div className="w-full md:w-[65%] md:h-[75vh]">
+      <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8 flex lg:flex-row flex-col lg:gap-6">
+        <div className="w-full md:w-[65%]">
           <AdBanners />
         </div>
 
-        <div className="w-full md:w-[35%]">
+        <div className="w-full md:w-[35%] mt-7 md:mt-0">
           <Categories />
         </div>
       </section>
 
       {/* Section 2 Popular This week */}
 
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 pb-8">
+      <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8">
         <h1 className="pb-6 text-xl font-medium md:font-semibold">
           Recent Orders
         </h1>
@@ -43,7 +43,7 @@ const Homepage = () => {
 
       {/* Section 3 Popular This week */}
 
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 pb-8">
+      <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8 pb-0">
         <h1 className="pb-6 text-xl font-medium md:font-semibold">
           Popular this Week
         </h1>
@@ -55,13 +55,13 @@ const Homepage = () => {
 
       {/* Ad banner again */}
 
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 pb-8">
+      <section className="max-w-[90rem] mx-auto w-full p-4 pt-0 md:p-8">
         <Image
           src={"/assets/asset-3.jpg"}
           width={500}
           height={500}
           alt="ad-banner"
-          className="object-cover w-full rounded h-[25vh] md:h-[50vh]"
+          className="object-cover w-full h-[25vh] md:h-[50vh]"
         />
       </section>
 
@@ -71,7 +71,7 @@ const Homepage = () => {
         <div className=" pb-6 flex h-auto items-center justify-between">
           <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
           <Link
-            href={"/"}
+            href={"/categories/rice"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -89,7 +89,7 @@ const Homepage = () => {
         <div className="pb-6 flex h-auto items-center justify-between">
           <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
           <Link
-            href={"/"}
+            href={"/categories/beans"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -107,7 +107,7 @@ const Homepage = () => {
         <div className="pb-6 flex h-auto items-center justify-between">
           <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
           <Link
-            href={"/"}
+            href={"/categories/fish"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -124,7 +124,7 @@ const Homepage = () => {
         <div className=" pb-6 flex h-auto items-center justify-between">
           <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
           <Link
-            href={"/"}
+            href={"/categories/rice"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -142,7 +142,7 @@ const Homepage = () => {
         <div className="pb-6 flex h-auto items-center justify-between">
           <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
           <Link
-            href={"/"}
+            href={"/categories/beans"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -160,7 +160,7 @@ const Homepage = () => {
         <div className="pb-6 flex h-auto items-center justify-between">
           <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
           <Link
-            href={"/"}
+            href={"/categories/fish"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -177,7 +177,7 @@ const Homepage = () => {
         <div className=" pb-6 flex h-auto items-center justify-between">
           <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
           <Link
-            href={"/"}
+            href={"/categories/rice"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -195,7 +195,7 @@ const Homepage = () => {
         <div className="pb-6 flex h-auto items-center justify-between">
           <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
           <Link
-            href={"/"}
+            href={"/categories/beans"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -213,7 +213,7 @@ const Homepage = () => {
         <div className="pb-6 flex h-auto items-center justify-between">
           <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
           <Link
-            href={"/"}
+            href={"/categories/fish"}
             className="active:scale-90 duration-200 text-primaryColor1"
           >
             <h1 className="text-sm md:text-base"> View More</h1>
@@ -224,8 +224,8 @@ const Homepage = () => {
         </div>
       </section>
 
-{/* footer section */}
-      <footer  className="max-w-[90rem] mx-auto pt-10 lg:pt-16 px-4 lg:px-16 bg-[#f1f3f5]">
+      {/* footer section */}
+      <footer className="max-w-[90rem] mx-auto pt-10 lg:pt-16 px-4 lg:px-16 bg-[#f1f3f5]">
         <Footer />
       </footer>
     </>

@@ -32,7 +32,7 @@ const Fish = () => {
             {" "}
             <div className="flex flex-col md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit mb-4">
               <Link
-                href={"/categories/fish"}
+                href={"/product"}
                 className="flex flex-col md:flex-row gap-2 md:gap-4"
               >
                 <div className="overflow-hidden rounded-lg">
@@ -41,7 +41,7 @@ const Fish = () => {
                     width={400}
                     height={400}
                     alt="rice"
-                    className="w-[150px] md:w-[170px] hover:scale-110 duration-200"
+                    className="w-full md:w-[170px] hover:scale-110 duration-200"
                   />
                 </div>
 
@@ -71,7 +71,7 @@ const Fish = () => {
             {" "}
             <div className="flex flex-col md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit mb-4">
               <Link
-                href={"/categories/fish"}
+                href={"/product"}
                 className="flex flex-col md:flex-row gap-2 md:gap-4"
               >
                 <div className="overflow-hidden rounded-lg">
@@ -80,7 +80,7 @@ const Fish = () => {
                     width={400}
                     height={400}
                     alt="rice"
-                    className="w-[150px] md:w-[170px] hover:scale-110 duration-200"
+                    className="w-full md:w-[170px] hover:scale-110 duration-200 rounded-lg"
                   />
                 </div>
 
@@ -110,7 +110,7 @@ const Fish = () => {
             {" "}
             <div className="flex flex-col md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit mb-4">
               <Link
-                href={"/categories/beans"}
+                href={"/product"}
                 className="flex flex-col md:flex-row gap-2 md:gap-4"
               >
                 <div className="overflow-hidden rounded-lg">
@@ -119,7 +119,7 @@ const Fish = () => {
                     width={400}
                     height={400}
                     alt="rice"
-                    className="w-[150px] md:w-[170px] hover:scale-110 duration-200"
+                    className="w-full md:w-[170px] hover:scale-110 duration-200"
                   />
                 </div>
 

@@ -11,7 +11,7 @@ const Categories = () => {
         </h1>
 
         <Link
-          href={"/"}
+          href={"/categories"}
           className="active:scale-90 duration-200 text-primaryColor1"
         >
           <h1 className="text-sm md:text-base"> View All</h1>

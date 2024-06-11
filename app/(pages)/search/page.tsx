@@ -2,14 +2,22 @@
 
 import Navbar from "@/app/components/Navbar";
 import Image from "next/image";
-import React from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 
 import IMG1 from "@/public/assets/asset-2.jpg";
 import Link from "next/link";
 import Footer from "@/app/components/Footer";
 
 const Search = () => {
-  const HandleChange = () => {};
+  const [search, setSearch] = useState<string>("");
+
+  const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+  const HandleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    alert(search);
+  };
   return (
     <>
       <nav className="sticky top-0 z-10">
@@ -17,7 +25,11 @@ const Search = () => {
       </nav>
 
       <main className="max-w-[90rem] p-8 border-b-2 border-primaryColor">
-        <div className=" md:mx-auto flex border bg-[#ecebf382] rounded-md md:w-3/4">
+        <form
+          action=""
+          onSubmit={HandleSubmit}
+          className=" md:mx-auto flex border bg-[#ecebf382] rounded-md md:w-3/4"
+        >
           <input
             type="text"
             name="search"
@@ -26,8 +38,9 @@ const Search = () => {
             placeholder="Search..."
           />
           <button className=" pr-3 cursor-pointer"> Search </button>
+        </form>
 
-          {/* <div className="flex border bg-[#ecebf382] rounded-md">
+        {/* <div className="flex border bg-[#ecebf382] rounded-md">
               <input
               type={password ? "password" : "text"}
               required
@@ -43,7 +56,6 @@ const Search = () => {
               {password ? "Show" : "Hide"}
               </h1>
             </div> */}
-        </div>
       </main>
 
       <h1 className="text-center md:text-2xl text-base p-8">

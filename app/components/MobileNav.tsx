@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { IconType } from "react-icons";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { MdOutlineFavoriteBorder, MdOutlineHome } from "react-icons/md";
 import { AiOutlineProduct } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -29,9 +29,9 @@ const MobileNav = () => {
   const openLinks: NavLinks = [
     {
       key: 1,
-      nav: "Products",
-      href: "/products",
-      Icon: AiOutlineProduct,
+      nav: "Home",
+      href: "/",
+      Icon: MdOutlineHome,
     },
     {
       key: 2,
@@ -227,7 +227,8 @@ const MobileNav = () => {
                       pathname === `${href}` ? " border-primaryColor" : ""
                     }  border-2 py-4 px-2 active:scale-90 duration-200`}
                   >
-                    <Icon className="hover:text-inherit inline-flex text-2xl relative bottom-[2px] mr-1" /> {nav}
+                    <Icon className="hover:text-inherit inline-flex text-2xl relative bottom-[2px] mr-1" />{" "}
+                    {nav}
                   </Link>
                 </>
               ))}

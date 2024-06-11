@@ -2,7 +2,7 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import React from "react";
 
-const Login = () => {
+const ProductPage = () => {
   return (
     <>
       {/* Navigation panel */}
@@ -10,7 +10,7 @@ const Login = () => {
         <Navbar />
       </nav>
 
-      <h1>This is the login page</h1>
+      <h1>This is the product page</h1>
 
       {/* footer section */}
       <footer className="max-w-[90rem] mx-auto pt-10 lg:pt-16 px-4 lg:px-16 bg-[#f1f3f5]">
@@ -20,4 +20,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ProductPage;
