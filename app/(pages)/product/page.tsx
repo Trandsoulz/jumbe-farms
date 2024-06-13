@@ -119,7 +119,7 @@ const ProductPage = () => {
               <AccordionItem value="item-1">
                 <AccordionTrigger>Description</AccordionTrigger>
                 <AccordionContent>
-                  Rice is a staple food for over half the world's population,
+                  Rice is a staple food for over half the world&apos;s population,
                   especially in Asia. Grown mainly in flooded paddies, it comes
                   in varieties like white rice, which is milled, and
                   nutrient-rich brown rice. It is a major carbohydrate source,
