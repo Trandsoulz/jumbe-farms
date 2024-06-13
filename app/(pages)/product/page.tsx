@@ -4,9 +4,9 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import { Rate } from "antd";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { IoHeart } from "react-icons/io5";
+import { IoCheckmarkDone, IoHeart } from "react-icons/io5";
 
 import {
   Accordion,
@@ -26,6 +26,8 @@ import {
 import ProductCard from "../home/components/RecentProduct";
 
 const ProductPage = () => {
+  const [currentImg, setCurrentImg] = useState<any>(0);
+
   const imgs = [
     "/categories/rice.jpg",
     "/categories/fish.jpg",
@@ -33,7 +35,36 @@ const ProductPage = () => {
     "/categories/rice.jpg",
   ];
 
-  const [currentImg, setCurrentImg] = useState<any>(0);
+  const [domLoaded, setDomLoaded] = useState(false);
+
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
+
+  const ShareProduct = async () => {
+    const url = window.location.href;
+    if (domLoaded) {
+      try {
+        await navigator.share({
+          // Title that occurs over
+          // web share dialog
+          title: "Jumbo farms product",
+
+          // URL to share
+          url: `${url}`,
+        });
+        // alert("Thanks for sharing!");
+      } catch (err) {
+        // Handle errors, if occurred
+        // alert("Error while using Web share API:");
+        // alert(err);
+      }
+    } else {
+      // Alerts user if API not available
+      await navigator.clipboard?.writeText(`${url}`);
+      //   alert("Browser doesn't support sharing. But we copied it to clipboard");
+    }
+  };
 
   return (
     <>
@@ -119,13 +150,13 @@ const ProductPage = () => {
               <AccordionItem value="item-1">
                 <AccordionTrigger>Description</AccordionTrigger>
                 <AccordionContent>
-                  Rice is a staple food for over half the world&apos;s population,
-                  especially in Asia. Grown mainly in flooded paddies, it comes
-                  in varieties like white rice, which is milled, and
-                  nutrient-rich brown rice. It is a major carbohydrate source,
-                  providing energy and essential nutrients. Economically and
-                  culturally significant, rice supports millions of farmers
-                  worldwide.
+                  Rice is a staple food for over half the world&apos;s
+                  population, especially in Asia. Grown mainly in flooded
+                  paddies, it comes in varieties like white rice, which is
+                  milled, and nutrient-rich brown rice. It is a major
+                  carbohydrate source, providing energy and essential nutrients.
+                  Economically and culturally significant, rice supports
+                  millions of farmers worldwide.
                 </AccordionContent>
               </AccordionItem>
 
@@ -145,6 +176,22 @@ const ProductPage = () => {
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
+
+            {/* In stock and share */}
+            <div className="flex justify-between py-4 h-auto items-center">
+              <h1 className="mt-6 inline-flex">
+                {" "}
+                <IoCheckmarkDone className="text-xl mr-2 relative top-1" /> In
+                stock
+              </h1>
+
+              <button
+                className="border-2 border-primaryColor1 px-4 py-2"
+                onClick={ShareProduct}
+              >
+                Share
+              </button>
+            </div>
 
             {/* Buttons */}
             <div className="flex space-x-6">
@@ -169,7 +216,7 @@ const ProductPage = () => {
       </main>
 
       <section className="mt-4 md:px-8 p-4">
-        <h1 className="md:text-2xl font-medium mb-12">You May Also Like</h1>
+        <h1 className="md:text-2xl font-medium mb-8">You May Also Like</h1>
         <ProductCard />
       </section>
 

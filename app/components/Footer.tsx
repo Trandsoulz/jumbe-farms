@@ -22,19 +22,14 @@ const Footer = () => {
 
   const footerLinks: FooterType = [
     {
-      link: "https://www.daycreations.co/",
+      link:"/",
       name: "Home",
       key: 0,
     },
     {
-      link: "https://www.daycreations.co/about.php",
+      link: "/",
       name: "Our Story",
       key: 1,
-    },
-    {
-      link: "https://www.daycreations.co/services.php",
-      name: "Services",
-      key: 2,
     },
   ];
 
@@ -119,7 +114,7 @@ const Footer = () => {
                 <h1 className="duration-200 inline-block text-base md:text-lg">
                   <span>Nigeria:</span> Lagos, Lekki{" "}
                   <span className="font-semibold">
-                    <Link href={"tel:+447883505475"}>+23481234590 </Link>
+                    <Link href={"tel:+23481234590"}>+23481234590 </Link>
                   </span>
                 </h1>
               </div>
