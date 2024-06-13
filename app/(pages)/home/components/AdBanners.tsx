@@ -73,15 +73,15 @@ const AdBanners = () => {
         }),
       ]}
     >
-      <CarouselContent className="mx-auto">
+      <CarouselContent className=" mx-auto">
         {[...Array(5)].map((key) => (
-          <CarouselItem key={key} className="pl-0">
+          <CarouselItem key={key} className="lg:basis-1/3 pl-0">
             <Image
-              src={"/assets/asset-3.jpg"}
+              src={"/assets/jumbo-ad1.jpg"}
               width={500}
               height={250}
               alt="ad-banner"
-              className="w-full md:h-[90%]"
+              className="w-full p-8 md:w-[450px] mx-auto"
             />
           </CarouselItem>
         ))}

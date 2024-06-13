@@ -18,6 +18,10 @@ const Homepage = () => {
       <nav className="sticky top-0 z-10">
         <Navbar />
       </nav>
+      {/* Section 0 [AdBanner] */}
+      <section className="max-w-[90rem] mx-auto ">
+        <AdBanners />
+      </section>
 
       {/* Section 1 [AdBanner] || [Categories]*/}
       <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8">

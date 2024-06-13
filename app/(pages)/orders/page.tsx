@@ -4,7 +4,7 @@ import Navigation from "@/app/components/Navigation";
 import Link from "next/link";
 import React from "react";
 
-const SavedPage = () => {
+const page = () => {
   return (
     <>
       {/* Navigation panel */}
@@ -15,8 +15,8 @@ const SavedPage = () => {
       <Navigation>
         <main className="flex justify-center items-center lg:h-[40vh] h-[70vh]">
           <div className="text-center">
-            <h1>You dont have any saved items.</h1>
-            <h1>Continue shopping, to save an item. </h1>
+            <h1>You dont have any orders.</h1>
+            <h1>Continue shopping, to order an item. </h1>
             Click on{" "}
             <Link className="text-primaryColor1 underline" href={"/categories"}>
               Categories
@@ -33,4 +33,4 @@ const SavedPage = () => {
   );
 };
 
-export default SavedPage;
+export default page;

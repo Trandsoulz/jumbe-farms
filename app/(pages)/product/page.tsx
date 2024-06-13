@@ -75,7 +75,7 @@ const ProductPage = () => {
 
       {/* Breadcrumbs */}
 
-      <section className="md:px-8 p-4">
+      <section className="max-w-[90rem] mx-auto md:px-8 p-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -215,7 +215,7 @@ const ProductPage = () => {
         </section>
       </main>
 
-      <section className="mt-4 md:px-8 p-4">
+      <section className="max-w-[90rem] mx-auto mt-4 md:px-8 p-4">
         <h1 className="md:text-2xl font-medium mb-8">You May Also Like</h1>
         <ProductCard />
       </section>

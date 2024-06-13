@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Link from "next/link";
 import { LuShoppingBag } from "react-icons/lu";
 
 const Cart = () => {
@@ -85,10 +86,11 @@ const Cart = () => {
               </form> */}
             </SheetDescription>
           </SheetHeader>
-          {/* 
-          <SheetFooter>
-            <SheetClose asChild></SheetClose>
-          </SheetFooter> */}
+
+          <SheetFooter >
+            {/* <SheetClose asChild></SheetClose> */}
+            {/* <Link href={"/checkout"} className="bg-primaryColor1 absolute left-0 text-center text-white text-xl font-medium right-0 p-6 bottom-0">Checkout Now</Link> */}
+          </SheetFooter>
         </SheetContent>
       </Sheet>
     </>

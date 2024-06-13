@@ -11,9 +11,12 @@ interface ProductsProps {
 
 const Products: React.FC<ProductsProps> = ({ id }) => {
   return (
-    <main className="grid gap-4 grid-cols-2 lg:grid-cols-3 mx-auto w-[90%] md:w-[95%]">
+    <main className="max-w-[90rem] grid gap-4 grid-cols-2 lg:grid-cols-3 mx-auto w-[90%] md:w-[95%]">
       {[...Array(6)].map((key) => (
-        <div className="flex flex-col md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit md:[w-400px] mb-4" key={key}>
+        <div
+          className="flex flex-col md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit md:[w-400px] mb-4"
+          key={key}
+        >
           <Link
             href={`/product`}
             className="flex flex-col md:flex-row gap-2 md:gap-4"
