@@ -51,24 +51,24 @@ const MobileNav = () => {
       href: "/orders",
       Icon: MdOutlineShoppingCart,
     },
-    {
-      key: 5,
-      nav: "Vouchers",
-      href: "/vouchers",
-      Icon: RxIdCard,
-    },
-    {
-      key: 6,
-      nav: "Help Center",
-      href: "/help-center",
-      Icon: RxIdCard,
-    },
-    {
-      key: 7,
-      nav: "Address Book",
-      href: "/address",
-      Icon: FaRegAddressCard,
-    },
+    // {
+    //   key: 5,
+    //   nav: "Vouchers",
+    //   href: "/vouchers",
+    //   Icon: RxIdCard,
+    // },
+    // {
+    //   key: 6,
+    //   nav: "Help Center",
+    //   href: "/help-center",
+    //   Icon: RxIdCard,
+    // },
+    // {
+    //   key: 7,
+    //   nav: "Address Book",
+    //   href: "/address",
+    //   Icon: FaRegAddressCard,
+    // },
     {
       key: 8,
       nav: "My account",

@@ -10,7 +10,9 @@ const ProductPage = () => {
         <Navbar />
       </nav>
 
+      <main className="h-[80vh] flex justify-center items-center">
       <h1>This is the product page</h1>
+      </main>
 
       {/* footer section */}
       <footer className="max-w-[90rem] mx-auto pt-10 lg:pt-16 px-4 lg:px-16 bg-[#f1f3f5]">
