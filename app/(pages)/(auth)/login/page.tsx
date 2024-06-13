@@ -70,7 +70,7 @@ const Login = () => {
                 Log In
               </button>
               <h1 className="text-right">
-                Don't have an account? {" "}
+                Don&apos;t have an account? {" "}
                 <Link href={"/signup"}>
                   <span className="text-primaryColor font-medium cursor-pointer hover:scale-110 active:scale-90">
                     Create one
