@@ -1,85 +1,224 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import AutoScroll from "embla-carousel-auto-scroll";
 const Categories = () => {
   return (
     <>
-      <div className="flex h-auto items-center mb-3 justify-between">
-        <h1 className="text-xl md:text-2xl font-medium text-primaryColor1">
-          Categories
-        </h1>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        plugins={[
+          AutoScroll({
+            playOnInit: true,
+            stopOnInteraction: false,
+            stopOnFocusIn: false,
+            speed: 1.5,
+          }),
+        ]}
+      >
+        <CarouselContent className="mx-auto">
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/rice"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1 mb-5 w-fit">
+                <Image
+                  src={"/categories/rice.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
 
-        <Link
-          href={"/categories"}
-          className="active:scale-90 duration-200 text-primaryColor1"
-        >
-          <h1 className="text-sm md:text-base"> View All</h1>
-        </Link>
-      </div>
-
-      {/* Categories list */}
-
-      {[...Array(3)].map((key) => (
-        <main key={key} className="flex gap-2 md:gap-4 justify-between">
-          <Link
-            href={"/categories/rice"}
-            className="hover:scale-110 duration-200"
-          >
-            <div className=" border-2 border-primaryColor1 mb-5 w-fit">
-              <Image
-                src={"/categories/rice.jpg"}
-                width={130}
-                height={100}
-                alt="rice"
-                className="w-[150px] md:w-[130px]"
-              />
-
-              <div className="p-1 md:p-3 bg-primaryColor1">
-                <h1 className="font-medium text-white text-center">Rice</h1>
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Rice</h1>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </CarouselItem>
 
-          <Link
-            href={"/categories/fish"}
-            className="hover:scale-110 duration-200"
-          >
-            <div className=" border-2 border-primaryColor1 b-5 w-fit">
-              <Image
-                src={"/categories/fish.jpg"}
-                width={130}
-                height={100}
-                alt="rice"
-                className="w-[150px] md:w-[130px]"
-              />
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/fish"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1 b-5 w-fit">
+                <Image
+                  src={"/categories/fish.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
 
-              <div className="p-1 md:p-3 bg-primaryColor1">
-                <h1 className="font-medium text-white text-center">Fish</h1>
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Fish</h1>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </CarouselItem>
 
-          <Link
-            href={"/categories/beans"}
-            className="hover:scale-110 duration-200"
-          >
-            <div className=" border-2 border-primaryColor1  mb-5 w-fit">
-              <Image
-                src={"/categories/beans.jpg"}
-                width={130}
-                height={100}
-                alt="rice"
-                className="w-[150px] md:w-[130px]"
-              />
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/beans"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1  mb-5 w-fit">
+                <Image
+                  src={"/categories/beans.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
 
-              <div className="p-1 md:p-3 bg-primaryColor1">
-                <h1 className="font-medium text-white text-center">Beans</h1>
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Beans</h1>
+                </div>
               </div>
-            </div>
-          </Link>
-        </main>
-      ))}
+            </Link>
+          </CarouselItem>
+
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/rice"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1 mb-5 w-fit">
+                <Image
+                  src={"/categories/rice.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
+
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Rice</h1>
+                </div>
+              </div>
+            </Link>
+          </CarouselItem>
+
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/fish"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1 b-5 w-fit">
+                <Image
+                  src={"/categories/fish.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
+
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Fish</h1>
+                </div>
+              </div>
+            </Link>
+          </CarouselItem>
+
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/beans"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1  mb-5 w-fit">
+                <Image
+                  src={"/categories/beans.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
+
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Beans</h1>
+                </div>
+              </div>
+            </Link>
+          </CarouselItem>
+
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/rice"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1 mb-5 w-fit">
+                <Image
+                  src={"/categories/rice.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
+
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Rice</h1>
+                </div>
+              </div>
+            </Link>
+          </CarouselItem>
+
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/fish"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1 b-5 w-fit">
+                <Image
+                  src={"/categories/fish.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
+
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Fish</h1>
+                </div>
+              </div>
+            </Link>
+          </CarouselItem>
+
+          <CarouselItem className="basis-1/5">
+            <Link
+              href={"/categories/beans"}
+              className="hover:scale-110 duration-200"
+            >
+              <div className=" border-2 border-primaryColor1  mb-5 w-fit">
+                <Image
+                  src={"/categories/beans.jpg"}
+                  width={200}
+                  height={100}
+                  alt="rice"
+                  className="w-[200px] bg-slate-500"
+                />
+
+                <div className="p-1 md:p-3 bg-primaryColor1">
+                  <h1 className="font-medium text-white text-center">Beans</h1>
+                </div>
+              </div>
+            </Link>
+          </CarouselItem>
+        </CarouselContent>
+      </Carousel>
     </>
   );
 };

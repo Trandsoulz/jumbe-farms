@@ -35,6 +35,23 @@ const Navbar = () => {
   return (
     <>
       <nav className="max-w-[90rem] mx-auto bg-primaryColor1 text-white shadow-lg">
+        {/* 2nd menu */}
+
+        <div className="item bg-primaryColor text-white p-2 text-center text-xs md:text-sm">
+          {" "}
+          <h1>
+            Call to order :{" "}
+            <span>
+              <Link
+                className="underline decoration-white underline-offset-1"
+                href={"tel:08012345678"}
+              >
+                08012345678
+              </Link>
+            </span>{" "}
+          </h1>
+        </div>
+        {/* 2nd menu */}
         {/*  1st menu */}
         <nav className=" py-4 px-8 h-auto items-center justify-between border-b-2 border-gray-500 md:flex hidden">
           {/* Nav links new, men, women, day series */}

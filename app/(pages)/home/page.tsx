@@ -10,6 +10,7 @@ import Rice from "./components/Rice";
 import Beans from "./components/Beans";
 import Fish from "./components/Fish";
 import Footer from "@/app/components/Footer";
+import MobileCategories from "./components/MobileCategories";
 
 const Homepage = () => {
   return (
@@ -19,13 +20,26 @@ const Homepage = () => {
       </nav>
 
       {/* Section 1 [AdBanner] || [Categories]*/}
-      <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8 flex lg:flex-row flex-col lg:gap-6">
-        <div className="w-full md:w-[65%]">
-          <AdBanners />
+      <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8">
+        <div className="flex h-auto items-center mb-3 justify-between">
+          <h1 className="text-xl md:text-2xl font-medium text-primaryColor1">
+            Categories
+          </h1>
+
+          <Link
+            href={"/categories"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View All</h1>
+          </Link>
         </div>
 
-        <div className="w-full md:w-[35%] mt-7 md:mt-0">
+        <div className="w-full hidden md:block mt-7">
           <Categories />
+        </div>
+
+        <div className="w-full md:hidden mt-7 md:mt-0">
+          <MobileCategories />
         </div>
       </section>
 
@@ -55,7 +69,7 @@ const Homepage = () => {
 
       {/* Ad banner again */}
 
-      <section className="max-w-[90rem] mx-auto w-full p-4 pt-0 md:p-8">
+      {/* <section className="max-w-[90rem] mx-auto w-full p-4 pt-0 md:p-8">
         <Image
           src={"/assets/asset-3.jpg"}
           width={500}
@@ -63,7 +77,7 @@ const Homepage = () => {
           alt="ad-banner"
           className="object-cover w-full h-[25vh] md:h-[50vh]"
         />
-      </section>
+      </section> */}
 
       {/* Rice Section  */}
 

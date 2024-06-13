@@ -110,6 +110,8 @@
   background: url("/assets/asset-1.jpg") center no-repeat;
 }
 
+
+
 ::-webkit-scrollbar {
   width: 10px;
 }
