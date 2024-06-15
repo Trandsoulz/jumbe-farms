@@ -73,21 +73,38 @@ const AdBanners = () => {
         }),
       ]}
     >
-      <CarouselContent className=" mx-auto">
+      <CarouselContent className="mx-auto">
         {[...Array(5)].map((key) => (
-          <CarouselItem key={key} className="lg:basis-1/3 pl-0">
-            <Image
-              src={"/assets/jumbo-ad1.jpg"}
-              width={500}
-              height={250}
-              alt="ad-banner"
-              className="w-full p-8 md:w-[450px] mx-auto"
-            />
-          </CarouselItem>
+          <>
+            <CarouselItem key={key} className="block md:hidden pl-0">
+              <Image
+                src={"/assets/jumbo-ad1.jpg"}
+                width={450}
+                height={250}
+                alt="ad-banner"
+                className="w-full p-8 mx-auto"
+              />
+            </CarouselItem>
+          </>
+        ))}
+      </CarouselContent>
+
+      <CarouselContent className="mx-auto">
+        {[...Array(5)].map((key) => (
+          <>
+            <CarouselItem key={key} className="md:block hidden pl-0">
+              <Image
+                src={"/assets/desktop-ad.png"}
+                width={1300}
+                height={700}
+                alt="ad-banner"
+                className="w-full p-8 mx-auto"
+              />
+            </CarouselItem>
+          </>
         ))}
       </CarouselContent>
     </Carousel>
-
   );
 };
 
