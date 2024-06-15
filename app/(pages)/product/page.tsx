@@ -104,7 +104,7 @@ const ProductPage = () => {
                 alt={`image of ${"asun rice"}`}
                 height={300}
                 width={500}
-                className="w-[500px] duration-300"
+                className="w-[400px] duration-300"
               />
 
               <section className=" md:scrollbar-thin overflow-hidden overflow-x-scroll w-full md:w-[400px] mx-auto pb-2">
