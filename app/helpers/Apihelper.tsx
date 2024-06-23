@@ -32,6 +32,7 @@ export const logUser = async (payload: any) => {
 
 export const getAddress = async () => {
   const res = await axios.get(`${api}/profile`, config);
+
   return res;
 };
 

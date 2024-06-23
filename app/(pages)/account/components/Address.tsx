@@ -12,9 +12,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
-const Address = () => {
+type AddressProps = {
+  currentaddress: any;
+};
+
+const Address: React.FC<AddressProps> = ({ currentaddress }) => {
+  const router = useRouter();
+
   const [loading, setLoading] = useState<boolean>(false);
   const [address, setAddress] = useState({
     full_name: "",
@@ -24,6 +31,12 @@ const Address = () => {
     tel: "",
     tel_2: "",
   });
+
+  useEffect(() => {
+    // Set address
+    setAddress(currentaddress);
+    console.log(address);
+  }, [currentaddress, address]);
 
   const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
     setAddress({
@@ -45,6 +58,7 @@ const Address = () => {
 
       setLoading(false);
       SuccessToast(res?.data?.message);
+      router.refresh();
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading(false);
@@ -58,13 +72,13 @@ const Address = () => {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <button className=" border-2  px-3 py-2 active:scale-[1.3] hover:scale-[1.6] duration-200">
-            Add address
+          <button className=" border-2  px-3 py-2 active:scale-[1] hover:scale-[.8] duration-200">
+            Add/Edit Address
           </button>
         </SheetTrigger>
         <SheetContent>
           <SheetHeader>
-            <SheetTitle>Add New Address</SheetTitle>
+            <SheetTitle>Add/Edit your Address</SheetTitle>
             <SheetDescription>
               {/* <h1>Your Address is empty</h1> */}
               <form
@@ -79,6 +93,7 @@ const Address = () => {
                     name="full_name"
                     className="border p-3 h-12 bg-[#ecebf382] rounded-md text-sm md:text-base block outline-none w-full"
                     onChange={handleInput}
+                    value={address?.full_name}
                     placeholder="John Doe"
                   />
                 </div>
@@ -90,6 +105,7 @@ const Address = () => {
                     name="street"
                     className="border p-3 h-12 bg-[#ecebf382] rounded-md text-sm md:text-base block outline-none w-full"
                     onChange={handleInput}
+                    value={address?.street}
                     placeholder="No. 1, chief ejuke-street, by chinda, off Ada-George road"
                   />
                 </div>
@@ -102,6 +118,7 @@ const Address = () => {
                     name="city"
                     className="border p-3 h-12 bg-[#ecebf382] rounded-md text-sm md:text-base block outline-none w-full"
                     onChange={handleInput}
+                    value={address?.city}
                     placeholder="Port Harcourt"
                   />
                 </div>
@@ -113,6 +130,7 @@ const Address = () => {
                     name="state"
                     className="border p-3 h-12 bg-[#ecebf382] rounded-md text-sm md:text-base block outline-none w-full"
                     onChange={handleInput}
+                    value={address?.state}
                     placeholder="Rivers"
                   />
                 </div>
@@ -128,6 +146,7 @@ const Address = () => {
                       placeholder="812 234 4567"
                       className=" p-3 h-12 bg-transparent text-sm md:text-base block outline-none w-full"
                       onChange={handleInput}
+                      value={address?.tel}
                     />
                   </div>
                 </div>
@@ -143,6 +162,7 @@ const Address = () => {
                       placeholder="812 234 4567"
                       className=" p-3 h-12 bg-transparent text-sm md:text-base block outline-none w-full"
                       onChange={handleInput}
+                      value={address?.tel_2}
                     />
                   </div>
                 </div>

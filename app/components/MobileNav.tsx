@@ -1,29 +1,24 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
 import Image from "next/image";
-import { LuAlignJustify, LuHeart, LuUser } from "react-icons/lu";
+import { LuAlignJustify, LuUser } from "react-icons/lu";
 import Link from "next/link";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 import { MdOutlineFavoriteBorder, MdOutlineHome } from "react-icons/md";
-import { AiOutlineProduct } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { RxIdCard } from "react-icons/rx";
-import { FaRegAddressCard } from "react-icons/fa";
+import { IoPowerOutline } from "react-icons/io5";
+import { deleteCookie, getCookie } from "cookies-next";
 
 type NavLinks = { key: number; nav: string; href: string; Icon: IconType }[];
 
 const MobileNav = () => {
+  const cookie = getCookie("x-auth-token");
+
   const pathname = usePathname();
+  const router = useRouter();
   const [open, setOpen] = useState<boolean>(false);
 
   const openLinks: NavLinks = [
@@ -77,113 +72,16 @@ const MobileNav = () => {
     },
   ];
 
-  // const matchingSets: NavLinks = [
-  //   {
-  //     key: 1,
-  //     nav: "Kindred Attire",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 2,
-  //     nav: "Uniformed Dressing",
-  //     href: "/",
-  //   },
-  // ];
+  const LogOut = () => {
+    deleteCookie("x-auth-token");
+    router.refresh();
+  };
 
-  // const shirts: NavLinks = [
-  //   {
-  //     key: 1,
-  //     nav: "Tops",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 2,
-  //     nav: "Tees",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 3,
-  //     nav: "T-Shirt",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 4,
-  //     nav: "Tank-top",
-  //     href: "/",
-  //   },
-  // ];
+  const [domLoaded, setDomLoaded] = useState(false);
 
-  // const outerwear: NavLinks = [
-  //   {
-  //     key: 1,
-  //     nav: "Jacket",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 2,
-  //     nav: "Coat",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 3,
-  //     nav: "Trouser",
-  //     href: "/",
-  //   },
-  // ];
-
-  // const suits: NavLinks = [
-  //   {
-  //     key: 1,
-  //     nav: "Bespoke",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 2,
-  //     nav: "Tuxedos",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 3,
-  //     nav: "Dinner Suits",
-  //     href: "/",
-  //   },
-  // ];
-
-  // const sportswear: NavLinks = [
-  //   {
-  //     key: 1,
-  //     nav: "Jogging Wear ",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 2,
-  //     nav: "Sporty Fits",
-  //     href: "/",
-  //   },
-  // ];
-
-  // const traditional: NavLinks = [
-  //   {
-  //     key: 1,
-  //     nav: "Etibo",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 2,
-  //     nav: "Ankara",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 3,
-  //     nav: "Agbada",
-  //     href: "/",
-  //   },
-  //   {
-  //     key: 4,
-  //     nav: "Dashiki",
-  //     href: "/",
-  //   },
-  // ];
+  useEffect(() => {
+    setDomLoaded(true);
+  }, []);
 
   return (
     <>
@@ -193,7 +91,7 @@ const MobileNav = () => {
         onClick={() => setOpen(!open)}
       />
 
-      <div
+      <section
         className={`${
           open ? "w-full" : " w-0"
         } duration-300 fixed top-0 bottom-0 left-0 bg-transparent/30 backdrop-blur-[2px] z-30 lg:hidden flex`}
@@ -233,6 +131,18 @@ const MobileNav = () => {
             </div>
             {/* LINKS */}
           </div>
+
+          <div>
+            {domLoaded && cookie && (
+              <button
+                onClick={LogOut}
+                className={`border-2 w-full py-4 px-2 active:scale-90 duration-200`}
+              >
+                <IoPowerOutline className="hover:text-inherit inline-flex text-2xl relative bottom-[2px] mr-1" />{" "}
+                LogOut
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Close button */}
@@ -240,7 +150,7 @@ const MobileNav = () => {
           className={`w-[20%] duration-300 h-screen`}
           onClick={() => setOpen(!open)}
         ></div>
-      </div>
+      </section>
     </>
   );
 };

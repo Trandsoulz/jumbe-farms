@@ -7,7 +7,7 @@ export const middleware = (request: NextRequest) => {
   // Implement a logic that'll check if the auth token is truly a valid token
 
   // Check if X-AUTH-TOKEN is present
-  if (authToken === false || !authToken) {
+  if (!authToken) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
   return NextResponse.next();
@@ -18,7 +18,7 @@ export const config = {
   matcher: [
     // "/",
     "/account/:path*",
-    // "/saved/:path*",
-    // "/orders/:path*",
+    "/saved/:path*",
+    "/orders/:path*",
   ],
 };

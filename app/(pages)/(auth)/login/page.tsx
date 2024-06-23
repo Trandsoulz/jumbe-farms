@@ -47,16 +47,15 @@ const Login = () => {
       const token = res?.data?.data?.token;
       setCookie("x-auth-token", `${token}`);
 
-      setTimeout(() => {
-        router.replace("/account");
-      }, 3000);
+      router.push("/account");
+      router.refresh();
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");
 
       const err = errMessage?.response?.data?.message;
       ErrorToast(err);
-    } 
+    }
     // finally {
     //   console.log("Try again later");
     // }
