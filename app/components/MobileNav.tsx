@@ -219,18 +219,16 @@ const MobileNav = () => {
             {/* LINKS */}
             <div className="flex flex-col space-y-3 text-left mb-10">
               {openLinks.map(({ href, nav, key, Icon }) => (
-                <>
-                  <Link
-                    href={href}
-                    key={key}
-                    className={` ${
-                      pathname === `${href}` ? " border-primaryColor" : ""
-                    }  border-2 py-4 px-2 active:scale-90 duration-200`}
-                  >
-                    <Icon className="hover:text-inherit inline-flex text-2xl relative bottom-[2px] mr-1" />{" "}
-                    {nav}
-                  </Link>
-                </>
+                <Link
+                  href={href}
+                  key={key}
+                  className={` ${
+                    pathname === `${href}` ? " border-primaryColor" : ""
+                  }  border-2 py-4 px-2 active:scale-90 duration-200`}
+                >
+                  <Icon className="hover:text-inherit inline-flex text-2xl relative bottom-[2px] mr-1" />{" "}
+                  {nav}
+                </Link>
               ))}
             </div>
             {/* LINKS */}

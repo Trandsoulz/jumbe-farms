@@ -1,18 +1,17 @@
 import React from "react";
 import Navbar from "../../components/Navbar";
-import Image from "next/image";
 import AdBanners from "./components/AdBanners";
 import Link from "next/link";
 import Categories from "./components/Categories";
 import ProductCard from "./components/RecentProduct";
 import PopularProduct from "./components/PopularProduct";
-import Rice from "./components/Rice";
-import Beans from "./components/Beans";
-import Fish from "./components/Fish";
 import Footer from "@/app/components/Footer";
 import MobileCategories from "./components/MobileCategories";
+import { getCategories } from "@/app/helpers/Apihelper";
+import Products from "./components/Products";
 
-const Homepage = () => {
+const Homepage = async () => {
+  const categories = await getCategories();
   return (
     <>
       <nav className="sticky top-0 z-10">
@@ -39,15 +38,15 @@ const Homepage = () => {
         </div>
 
         <div className="w-full hidden md:block mt-7">
-          <Categories />
+          <Categories category={categories.data.data.categories} />
         </div>
 
         <div className="w-full md:hidden mt-7 md:mt-0">
-          <MobileCategories />
+          <MobileCategories category={categories.data.data.categories} />
         </div>
       </section>
 
-      {/* Section 2 Popular This week */}
+      {/* Section 2 Recent Orders */}
 
       <section className="max-w-[90rem] mx-auto w-full p-4 md:p-8">
         <h1 className="pb-6 text-xl font-medium md:font-semibold">
@@ -71,175 +70,10 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Ad banner again */}
-
-      {/* <section className="max-w-[90rem] mx-auto w-full p-4 pt-0 md:p-8">
-        <Image
-          src={"/assets/asset-3.jpg"}
-          width={500}
-          height={500}
-          alt="ad-banner"
-          className="object-cover w-full h-[25vh] md:h-[50vh]"
-        />
-      </section> */}
-
-      {/* Rice Section  */}
+      {/* Product sections, looping through each other  */}
 
       <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className=" pb-6 flex h-auto items-center justify-between">
-          <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
-          <Link
-            href={"/categories/rice"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-
-        <div>
-          <Rice />
-        </div>
-      </section>
-
-      {/* Beans Section  */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className="pb-6 flex h-auto items-center justify-between">
-          <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
-          <Link
-            href={"/categories/beans"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-
-        <div>
-          <Beans />
-        </div>
-      </section>
-
-      {/* Fish Section */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className="pb-6 flex h-auto items-center justify-between">
-          <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
-          <Link
-            href={"/categories/fish"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-        <div>
-          <Fish />
-        </div>
-      </section>
-
-      {/* Rice Section  */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className=" pb-6 flex h-auto items-center justify-between">
-          <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
-          <Link
-            href={"/categories/rice"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-
-        <div>
-          <Rice />
-        </div>
-      </section>
-
-      {/* Beans Section  */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className="pb-6 flex h-auto items-center justify-between">
-          <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
-          <Link
-            href={"/categories/beans"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-
-        <div>
-          <Beans />
-        </div>
-      </section>
-
-      {/* Fish Section */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className="pb-6 flex h-auto items-center justify-between">
-          <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
-          <Link
-            href={"/categories/fish"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-        <div>
-          <Fish />
-        </div>
-      </section>
-
-      {/* Rice Section  */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className=" pb-6 flex h-auto items-center justify-between">
-          <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
-          <Link
-            href={"/categories/rice"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-
-        <div>
-          <Rice />
-        </div>
-      </section>
-
-      {/* Beans Section  */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className="pb-6 flex h-auto items-center justify-between">
-          <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
-          <Link
-            href={"/categories/beans"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-
-        <div>
-          <Beans />
-        </div>
-      </section>
-
-      {/* Fish Section */}
-
-      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
-        <div className="pb-6 flex h-auto items-center justify-between">
-          <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
-          <Link
-            href={"/categories/fish"}
-            className="active:scale-90 duration-200 text-primaryColor1"
-          >
-            <h1 className="text-sm md:text-base"> View More</h1>
-          </Link>
-        </div>
-        <div>
-          <Fish />
-        </div>
+        <Products category={categories.data.data.categories} />
       </section>
 
       {/* footer section */}

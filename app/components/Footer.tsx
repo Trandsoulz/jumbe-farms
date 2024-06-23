@@ -22,7 +22,7 @@ const Footer = () => {
 
   const footerLinks: FooterType = [
     {
-      link:"/",
+      link: "/",
       name: "Home",
       key: 0,
     },
@@ -68,15 +68,13 @@ const Footer = () => {
 
               <div className="space-y-2 flex flex-col ">
                 {footerLinks.map(({ key, link, name }) => (
-                  <>
-                    <Link
-                      href={link}
-                      className="hover:font-semibold duration-200 inline-block text-base md:text-lg"
-                      key={key}
-                    >
-                      {name}
-                    </Link>
-                  </>
+                  <Link
+                    href={link}
+                    className="hover:font-semibold duration-200 inline-block text-base md:text-lg"
+                    key={key}
+                  >
+                    {name}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -86,15 +84,13 @@ const Footer = () => {
 
               <div className="space-y-2 flex flex-col">
                 {footerLinks1.map(({ key, link, name }) => (
-                  <>
-                    <Link
-                      href={link}
-                      className="hover:font-semibold duration-200 inline-block text-base md:text-lg"
-                      key={key}
-                    >
-                      {name}
-                    </Link>
-                  </>
+                  <Link
+                    href={link}
+                    className="hover:font-semibold duration-200 inline-block text-base md:text-lg"
+                    key={key}
+                  >
+                    {name}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -124,7 +120,7 @@ const Footer = () => {
             <h1 className="text-xl font-semibold text-primaryColor ">
               Subscribe to our newsletter
             </h1>
-            <p>to stay upto date with the latest from Daycreations</p>
+            <p>Stay upto date with the latest from Jumbo Farms</p>
 
             <div className=" w-[86%] mt-4">
               <div className="flex border bg-[#ecebf382]">

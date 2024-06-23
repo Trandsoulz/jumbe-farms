@@ -2,20 +2,65 @@
 
 import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
+import { registerUser } from "@/app/helpers/Apihelper";
+import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
 import Image from "next/image";
 import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const Signup = () => {
+  const router = useRouter();
+
   const [password, setPassword] = useState(false);
 
+  const [loading, setLoading] = useState<string>("Submit");
+
+  const [registerDetails, setRegisterDetails] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
   const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+    setRegisterDetails({
+      ...registerDetails,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const HandleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Form has been submitted. Check your email");
+
+    // Set Loading state
+    setLoading("Loading...");
+
+    // Make request to login user
+    try {
+      const res = await registerUser(registerDetails);
+      console.log(res);
+
+      setLoading("Redirecting...");
+      SuccessToast(res?.data?.message);
+
+      // Get bearer token from req.body and set it to cookies
+      const token = res?.data?.data?.token;
+      setCookie("x-auth-token", `${token}`);
+
+      setTimeout(() => {
+        router.replace("/account");
+      }, 3000);
+    } catch (errMessage: any) {
+      console.error(errMessage);
+      setLoading("Submit");
+
+      const err = errMessage?.response?.data?.message;
+      ErrorToast(err);
+    } 
+    // finally {
+    //   console.log("Try again later");
+    // }
   };
 
   return (
@@ -84,10 +129,13 @@ const Signup = () => {
 
               <button
                 className="p-3 h-12 bg-primaryColor1 text-white text-center w-full active:scale-95 duration-200 disabled:opacity-75 disabled:scale-100 disabled:cursor-wait"
-                // disabled={loading ? true : false}
+                disabled={
+                  loading === "Loading..." || loading === "Redirecting..."
+                    ? true
+                    : false
+                }
               >
-                {/* {loading ? "Loading..." : "Submit"} */}
-                Sign Up
+                {loading}
               </button>
               <h1 className="text-right">
                 Already have an account?{" "}

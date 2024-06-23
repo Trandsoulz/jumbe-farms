@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import { Rate } from "antd";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Key } from "react";
 
 import { IoCheckmarkDone, IoHeart } from "react-icons/io5";
 
@@ -23,22 +23,33 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import ProductCard from "../home/components/RecentProduct";
+import ProductCard from "@/app/(pages)/home/components/RecentProduct";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import { getProductsByCategories } from "@/app/helpers/Apihelper";
+import ProductComponent from "@/app/(pages)/home/components/ProductComp";
 
-const ProductPage = () => {
+type ProductProps = {
+  product: any;
+};
+
+const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
+  const { category, images, name, price, size, _id } = product;
+
+  //   const [products, setProducts] = useState([]);
+
   const [currentImg, setCurrentImg] = useState<any>(0);
-
-  const imgs = [
-    "/categories/rice.jpg",
-    "/categories/fish.jpg",
-    "/categories/beans.jpg",
-    "/categories/rice.jpg",
-  ];
 
   const [domLoaded, setDomLoaded] = useState(false);
 
   useEffect(() => {
     setDomLoaded(true);
+
+    // const fetchCategoriesProducts = async () => {
+    //   const products = await getProductsByCategories(category);
+    //   console.log(products.data.data.products);
+    //   setProducts(products.data.data.products);
+    // };
+    // fetchCategoriesProducts();
   }, []);
 
   const ShareProduct = async () => {
@@ -83,11 +94,13 @@ const ProductPage = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/categories">Categories</BreadcrumbLink>
+              <BreadcrumbLink href={`/categories/${category}`}>
+                Categories
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Rice</BreadcrumbPage>
+              <BreadcrumbPage className="capitalize">{category}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -97,45 +110,54 @@ const ProductPage = () => {
 
       <main className="p-4 max-w-[90rem] mx-auto">
         <section className="flex md:flex-row flex-col justify-between gap-4">
-          <div className="md:w-1/2 w-full flex justify-center">
-            <div>
+          <div className="md:w-1/2 w-full flex flex-col items-center justify-center">
+            {images.length === 0 ? (
               <Image
-                src={`${imgs[currentImg]}`}
-                alt={`image of ${"asun rice"}`}
+                src={`/assets/jumbo-ad1.jpg`}
+                alt={`image of ${name}`}
+                priority
                 height={300}
                 width={500}
                 className="w-[400px] duration-300"
               />
+            ) : (
+              <Image
+                src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${images[currentImg]}`}
+                alt={`image of ${name}`}
+                priority
+                height={300}
+                width={500}
+                className="w-[250px] md:w-[400px] md:h-auto duration-300"
+              />
+            )}
 
-              <section className=" md:scrollbar-thin overflow-hidden overflow-x-scroll w-full md:w-[400px] mx-auto pb-2">
-                <div className="flex gap-4 pt-4 px-2">
-                  {imgs.map((img, index) => (
-                    <>
-                      <Image
-                        key={index}
-                        src={img}
-                        alt="img-name"
-                        width={100}
-                        height={70}
-                        className={`rounded hover:cursor-pointer ${
-                          currentImg === index
-                            ? "border-2 border-primaryColor1"
-                            : ""
-                        }`}
-                        onClick={() => setCurrentImg(index)}
-                      />
-                    </>
-                  ))}
-                </div>
-              </section>
-            </div>
+            <section className=" md:scrollbar-thin overflow-hidden overflow-x-scroll w-full md:w-[400px] mx-auto pb-2">
+              <div className="flex gap-4 pt-4 px-2 justify-center">
+                {images.map((img: string, i: number) => (
+                  <Image
+                    key={i}
+                    src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${img}`}
+                    alt={`images of ${name}`}
+                    priority
+                    width={100}
+                    height={70}
+                    className={`rounded hover:cursor-pointer ${
+                      currentImg === i ? "border-2 border-primaryColor1" : ""
+                    }`}
+                    onClick={() => setCurrentImg(i)}
+                  />
+                ))}
+              </div>
+            </section>
           </div>
           <div className="md:w-1/2 w-full p-4">
-            <h1 className="text-2xl">A bag of rice [50kg]</h1>
+            <h1 className="text-2xl">
+              {name} [{size}kg]
+            </h1>
 
             <div className="flex justify-between mt-6 border-b-2 pb-2 border-slate-600 ">
-              <h1>₦15,500</h1>
-
+              <h1>₦{`${price.toLocaleString("en-US")}`}</h1>
+              {/* 
               <div>
                 {" "}
                 <Rate
@@ -143,11 +165,11 @@ const ProductPage = () => {
                   defaultValue={5}
                   className="hidden md:block md:text-xs "
                 />
-              </div>
+              </div> */}
             </div>
 
             <Accordion type="single" collapsible className="mt-5">
-              <AccordionItem value="item-1">
+              {/* <AccordionItem value="item-1">
                 <AccordionTrigger>Description</AccordionTrigger>
                 <AccordionContent>
                   Rice is a staple food for over half the world&apos;s
@@ -158,7 +180,7 @@ const ProductPage = () => {
                   Economically and culturally significant, rice supports
                   millions of farmers worldwide.
                 </AccordionContent>
-              </AccordionItem>
+              </AccordionItem> */}
 
               <AccordionItem value="item-2">
                 <AccordionTrigger>Return Policy</AccordionTrigger>
@@ -217,7 +239,7 @@ const ProductPage = () => {
 
       <section className="max-w-[90rem] mx-auto mt-4 md:px-8 p-4">
         <h1 className="md:text-2xl font-medium mb-8">You May Also Like</h1>
-        <ProductCard />
+        <ProductComponent name={category} />
       </section>
 
       {/* footer section */}
@@ -228,4 +250,4 @@ const ProductPage = () => {
   );
 };
 
-export default ProductPage;
+export default ProductPageComponent;

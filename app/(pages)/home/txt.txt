@@ -1,0 +1,123 @@
+
+      {/* Fish Section */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className="pb-6 flex h-auto items-center justify-between">
+          <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
+          <Link
+            href={"/categories/fish"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+        <div>
+          <Fish />
+        </div>
+      </section>
+
+      {/* Rice Section  */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className=" pb-6 flex h-auto items-center justify-between">
+          <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
+          <Link
+            href={"/categories/rice"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+
+        <div>
+          <Rice />
+        </div>
+      </section>
+
+      {/* Beans Section  */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className="pb-6 flex h-auto items-center justify-between">
+          <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
+          <Link
+            href={"/categories/beans"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+
+        <div>
+          <Beans />
+        </div>
+      </section>
+
+      {/* Fish Section */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className="pb-6 flex h-auto items-center justify-between">
+          <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
+          <Link
+            href={"/categories/fish"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+        <div>
+          <Fish />
+        </div>
+      </section>
+
+      {/* Rice Section  */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className=" pb-6 flex h-auto items-center justify-between">
+          <h1 className=" text-xl font-medium md:font-semibold">Rice</h1>
+          <Link
+            href={"/categories/rice"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+
+        <div>
+          <Rice />
+        </div>
+      </section>
+
+      {/* Beans Section  */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className="pb-6 flex h-auto items-center justify-between">
+          <h1 className=" text-xl font-medium md:font-semibold">Beans</h1>
+          <Link
+            href={"/categories/beans"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+
+        <div>
+          <Beans />
+        </div>
+      </section>
+
+      {/* Fish Section */}
+
+      <section className="max-w-[90rem] mx-auto w-full px-4 md:px-8 ">
+        <div className="pb-6 flex h-auto items-center justify-between">
+          <h1 className="text-xl font-medium md:font-semibold">Fish</h1>
+          <Link
+            href={"/categories/fish"}
+            className="active:scale-90 duration-200 text-primaryColor1"
+          >
+            <h1 className="text-sm md:text-base"> View More</h1>
+          </Link>
+        </div>
+        <div>
+          <Fish />
+        </div>
+      </section>

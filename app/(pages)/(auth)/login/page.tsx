@@ -2,20 +2,64 @@
 
 import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
+import { logUser } from "@/app/helpers/Apihelper";
+import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
+import { setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 const Login = () => {
+  const router = useRouter();
+
   const [password, setPassword] = useState(false);
 
+  const [loading, setLoading] = useState<string>("Submit");
+
+  const [loginDetails, setloginDetails] = useState({
+    email: "",
+    password: "",
+  });
+
   const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+    setloginDetails({
+      ...loginDetails,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const HandleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Form has been submitted. Check your email");
+
+    // Set Loading state
+    setLoading("Loading...");
+
+    // Make request to login user
+    try {
+      const res = await logUser(loginDetails);
+      console.log(res);
+
+      setLoading("Redirecting...");
+      SuccessToast("Welcome Back");
+
+      // Get bearer token from req.body and set it to cookies
+      const token = res?.data?.data?.token;
+      setCookie("x-auth-token", `${token}`);
+
+      setTimeout(() => {
+        router.replace("/account");
+      }, 3000);
+    } catch (errMessage: any) {
+      console.error(errMessage);
+      setLoading("Submit");
+
+      const err = errMessage?.response?.data?.message;
+      ErrorToast(err);
+    } 
+    // finally {
+    //   console.log("Try again later");
+    // }
   };
 
   return (
@@ -64,13 +108,16 @@ const Login = () => {
 
               <button
                 className="p-3 h-12 bg-primaryColor1 text-white text-center w-full active:scale-95 duration-200 disabled:opacity-75 disabled:scale-100 disabled:cursor-wait"
-                // disabled={loading ? true : false}
+                disabled={
+                  loading === "Loading..." || loading === "Redirecting..."
+                    ? true
+                    : false
+                }
               >
-                {/* {loading ? "Loading..." : "Submit"} */}
-                Log In
+                {loading}
               </button>
               <h1 className="text-right">
-                Don&apos;t have an account? {" "}
+                Don&apos;t have an account?{" "}
                 <Link href={"/signup"}>
                   <span className="text-primaryColor font-medium cursor-pointer hover:scale-110 active:scale-90">
                     Create one

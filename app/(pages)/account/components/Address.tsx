@@ -1,5 +1,7 @@
 "use client";
 
+import { updateAddress } from "@/app/helpers/Apihelper";
+import { SuccessToast, ErrorToast } from "@/app/helpers/Toast";
 import {
   Sheet,
   SheetClose,
@@ -10,16 +12,46 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ChangeEvent, FormEvent } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 const Address = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [address, setAddress] = useState({
+    full_name: "",
+    street: "",
+    city: "",
+    state: "",
+    tel: "",
+    tel_2: "",
+  });
+
   const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e);
+    setAddress({
+      ...address,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const HandleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Form has been submitted. Check your email");
+
+    // Set Loading state
+    setLoading(true);
+
+    // Make request to login user
+    try {
+      const res = await updateAddress(address);
+      console.log(res);
+
+      setLoading(false);
+      SuccessToast(res?.data?.message);
+    } catch (errMessage: any) {
+      console.error(errMessage);
+      setLoading(false);
+
+      const err = errMessage?.response?.data?.error;
+      ErrorToast(err);
+    }
   };
 
   return (
@@ -35,7 +67,10 @@ const Address = () => {
             <SheetTitle>Add New Address</SheetTitle>
             <SheetDescription>
               {/* <h1>Your Address is empty</h1> */}
-              <form onSubmit={HandleSubmit} className="space-y-5 my-4">
+              <form
+                onSubmit={HandleSubmit}
+                className="space-y-5 my-4 text-black"
+              >
                 <div className="">
                   <label htmlFor="full_name">Full Name</label>
                   <input
@@ -113,12 +148,10 @@ const Address = () => {
                 </div>
 
                 <button
-                  className="px-7 py-3 bg-primaryColor text-white rounded-sm hover:scale-110 active:scale-90 duration-200"
-                  //   onClick={() => {
-                  //     console.log("Submitted");
-                  //   }}
+                  className="px-7 py-3 bg-primaryColor text-white rounded-sm hover:scale-110 active:scale-90 duration-200 disabled:opacity-75 disabled:scale-100 disabled:cursor-wait"
+                  disabled={loading}
                 >
-                  Save changes
+                  {loading ? "Loading..." : "Save Changes"}
                 </button>
               </form>
             </SheetDescription>
