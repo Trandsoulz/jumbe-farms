@@ -11,16 +11,23 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { LuShoppingBag } from "react-icons/lu";
-import { fetchCart } from "../helpers/Apihelper";
+import { fetchCart, incrementCurrentTime } from "../helpers/Apihelper";
+import Image from "next/image";
+import { FaMinus, FaPlus } from "react-icons/fa6";
+import { Separator } from "@/components/ui/separator";
 
 const Cart = () => {
+  const [cart, setCart] = useState([]);
+
   const fetchCartLists = useCallback(async () => {
     try {
       const res = await fetchCart();
+      const cartItems = res.data.data.cart.items;
+      setCart(cartItems);
 
-      console.log(res);
+      console.log(res.data.data.cart);
     } catch (error) {
       console.log(error);
     }
@@ -30,6 +37,15 @@ const Cart = () => {
     fetchCartLists();
   }, [fetchCartLists]);
 
+  const incrementItem = async (id: string, amount: number) => {
+    try {
+      const res = await incrementCurrentTime(id, amount);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Sheet>
@@ -38,74 +54,77 @@ const Cart = () => {
             <LuShoppingBag className="hover:text-primaryColor3 duration-200" />
           </button>
         </SheetTrigger>
-        <SheetContent>
+        <SheetContent className="w-[90%] overflow-y-scroll">
           <SheetHeader>
             <SheetTitle>Your Cart</SheetTitle>
-            <SheetDescription>
-              <h1>Your cart is empty</h1>
-              {/* <form onSubmit={handleSubmit} className="space-y-5 my-4">
-                <div className="">
-                  <label htmlFor="full_name">Full Name</label>
-                  <input
-                    type="text"
-                    required
-                    name="full_name"
-                    className="border p-3 h-12 bg-[#ecebf382] rounded-md text-sm md:text-base block outline-none w-full"
-                    onChange={handleInput}
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div className="">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    required
-                    name="email"
-                    className="border p-3 h-12 bg-[#ecebf382] rounded-md text-sm md:text-base block outline-none w-full"
-                    onChange={handleInput}
-                    placeholder="me@myself.com"
-                  />
-                </div>
+            <SheetDescription className="text-black text-md">
+              {/* <h1>Your cart is empty</h1> */}
 
-                <div className="">
-                  <label htmlFor="phone_number">Phone Number</label>
-                  <div className="flex border bg-[#ecebf382] rounded-md">
-                    <h1 className="relative top-3 pl-3">+234</h1>
-                    <input
-                      type="text"
-                      required
-                      name="tel"
-                      placeholder="812 234 4567"
-                      className=" p-3 h-12 bg-transparent text-sm md:text-base block outline-none w-full"
-                      onChange={handleInput}
-                    />
+              <main className="cart space-y-5">
+                {cart.map(({ product, quantity, _id }: any) => (
+                  <div className="border-2 border-primaryColor1 flex gap-4">
+                    <div className="w-[30%]">
+                      {/* <Image
+                        src={"/assets/jumbo-ad1.jpg"}
+                        alt={"item-1"}
+                        width={150}
+                        height={100}
+                        className="w-full"
+                        priority
+                      /> */}
+
+                      {product.images.length === 0 ? (
+                        <Image
+                          src={`/assets/jumbo-ad1.jpg`}
+                          alt={`image of ${product.name}`}
+                          priority
+                          height={100}
+                          width={150}
+                          className="w-full"
+                        />
+                      ) : (
+                        <Image
+                          src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${product.images[0]}`}
+                          alt={`image of ${name}`}
+                          priority
+                          height={100}
+                          width={150}
+                          className="w-full"
+                        />
+                      )}
+                    </div>
+                    <div className="py-2 space-y-2">
+                      <h1>{`${product.name} [${product.size}kg]`}</h1>
+                      <h1>₦{`${product.price.toLocaleString("en-US")}`}</h1>
+
+                      <div className="border-2 border-primaryColor1 flex text-center w-fit">
+                        <button
+                          className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30"
+                          disabled={quantity <= 1 || quantity >= 9}
+                        >
+                          <FaMinus />
+                        </button>
+                        <Separator orientation="vertical" />
+                        <h1 className="w-[25px]"> {quantity} </h1>
+                        <Separator orientation="vertical" />
+                        <button
+                          className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:bg-primaryColor2"
+                          onClick={() => incrementItem(_id, quantity + 1)}
+                        >
+                          <FaPlus />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                <div className="">
-                  <label htmlFor="date_of_birth">Date of Birth</label>
-                  <div className="flex border bg-[#ecebf382] rounded-md">
-                    <DatePicker
-                      className=" p-3 h-12 bg-transparent text-sm md:text-base block outline-none w-full"
-                      //   name="dob"
-                      onChange={onChange}
-                    />
-                  </div>
-                </div>
-
-                <button
-                  className="px-7 py-3 bg-primaryColor text-white rounded-sm hover:scale-110 active:scale-90 duration-200"
-                  //   onClick={() => {
-                  //     console.log("Submitted");
-                  //   }}
-                >
-                  Save changes
-                </button>
-              </form> */}
+                ))}
+              </main>
             </SheetDescription>
           </SheetHeader>
 
           <SheetFooter>
+            <button className="fixed bg-primaryColor1 left-0 right-0 py-7 ">
+              Checkout Now
+            </button>
             {/* <SheetClose asChild></SheetClose> */}
             {/* <Link href={"/checkout"} className="bg-primaryColor1 absolute left-0 text-center text-white text-xl font-medium right-0 p-6 bottom-0">Checkout Now</Link> */}
           </SheetFooter>

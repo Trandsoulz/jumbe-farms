@@ -28,12 +28,14 @@ import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { addToCart, getProductsByCategories } from "@/app/helpers/Apihelper";
 import ProductComponent from "@/app/(pages)/home/components/ProductComp";
 import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
+import { useRouter } from "next/navigation";
 
 type ProductProps = {
   product: any;
 };
 
 const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
+  const router = useRouter();
   const { category, images, name, price, size, _id } = product;
 
   //   const [products, setProducts] = useState([]);
@@ -60,7 +62,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
         await navigator.share({
           // Title that occurs over
           // web share dialog
-          title: `${name}`,
+          title: `${name} [${size}kg]`,
 
           // URL to share
           url: `${url}`,
@@ -88,8 +90,8 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
     try {
       const res = await addToCart(items);
       console.log(res.data.message);
-
       SuccessToast(res.data.message);
+      router.refresh();
     } catch (error: any) {
       console.log(error);
       ErrorToast(error.response.data.message);

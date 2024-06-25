@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function Error({
   error,
   reset,
@@ -7,6 +9,7 @@ export default function Error({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  const router = useRouter();
   return (
     <main className="flex h-screen flex-col bg-white">
       <div className=" h-64 w-full bg-img-not-found"></div>
@@ -22,7 +25,7 @@ export default function Error({
           </p>
 
           <button
-            onClick={() => reset()}
+            onClick={() => router.refresh()}
             className="mt-6 inline-block rounded bg-primaryColor px-5 py-3 text-sm font-medium text-white hover:bg-primaryColor focus:outline-none focus:ring"
           >
             Try Again

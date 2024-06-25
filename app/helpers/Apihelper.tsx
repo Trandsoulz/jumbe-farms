@@ -90,7 +90,8 @@ export const addToCart = async (payload: any) => {
 export const incrementCurrentTime = async (id: string, amount: number) => {
   try {
     const res = await axios.get(
-      `${api}/cart/increment?productId=${id}&amount=${amount}`
+      `${api}/cart/increment?productId=${id}&amount=${amount}`,
+      config
     );
 
     return res;
@@ -102,7 +103,8 @@ export const incrementCurrentTime = async (id: string, amount: number) => {
 export const decrementCurrentTime = async (id: string, amount: number) => {
   try {
     const res = await axios.get(
-      `${api}/cart/decrement?productId=${id}&amount=${amount}`
+      `${api}/cart/decrement?productId=${id}&amount=${amount}`,
+      config
     );
 
     return res;
