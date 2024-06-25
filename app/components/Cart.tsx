@@ -62,7 +62,7 @@ const Cart = () => {
 
               <main className="cart space-y-5">
                 {cart.map(({ product, quantity, _id }: any) => (
-                  <div className="border-2 border-primaryColor1 flex gap-4">
+                  <div className="border-2 border-primaryColor1 flex gap-4" key={_id}>
                     <div className="w-[30%]">
                       {/* <Image
                         src={"/assets/jumbo-ad1.jpg"}
