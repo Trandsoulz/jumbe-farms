@@ -25,8 +25,9 @@ import {
 } from "@/components/ui/breadcrumb";
 import ProductCard from "@/app/(pages)/home/components/RecentProduct";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { getProductsByCategories } from "@/app/helpers/Apihelper";
+import { addToCart, getProductsByCategories } from "@/app/helpers/Apihelper";
 import ProductComponent from "@/app/(pages)/home/components/ProductComp";
+import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
 
 type ProductProps = {
   product: any;
@@ -59,7 +60,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
         await navigator.share({
           // Title that occurs over
           // web share dialog
-          title: "Jumbo farms product",
+          title: `${name}`,
 
           // URL to share
           url: `${url}`,
@@ -74,6 +75,24 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
       // Alerts user if API not available
       await navigator.clipboard?.writeText(`${url}`);
       //   alert("Browser doesn't support sharing. But we copied it to clipboard");
+    }
+  };
+
+  // Adding Item to Cart
+  const items: any = {
+    item: { product: _id, quantity: 1 },
+  };
+  console.log;
+
+  const addItemToCart = async () => {
+    try {
+      const res = await addToCart(items);
+      console.log(res.data.message);
+
+      SuccessToast(res.data.message);
+    } catch (error: any) {
+      console.log(error);
+      ErrorToast(error.response.data.message);
     }
   };
 
@@ -218,7 +237,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
             {/* Buttons */}
             <div className="flex space-x-6">
               <button
-                onClick={() => alert("Added to cart")}
+                onClick={addItemToCart}
                 className="w-[80%] bg-primaryColor px-5 py-3 text-white"
               >
                 {" "}

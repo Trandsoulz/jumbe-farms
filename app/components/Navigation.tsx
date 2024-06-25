@@ -34,19 +34,17 @@ const Navigation = ({ children }: { children: React.ReactNode }) => {
         <main className=" lg:block hidden md:w-[15%]">
           <nav className="bg-primaryColor1 text-white py-6 text-center space-y-6">
             {navigation.map(({ key, nav, href }) => (
-              <>
-                <Link
-                  href={href}
-                  className={`${
-                    pathname === `${href}`
-                      ? " border-white border-2 text-white "
-                      : ""
-                  } h-auto py-5 px-11 duration-200 flex items-center hover:border-2 font-medium gap-2 hover:border-white mx-5 text-center`}
-                  key={key}
-                >
-                  {nav}
-                </Link>
-              </>
+              <Link
+                href={href}
+                className={`${
+                  pathname === `${href}`
+                    ? " border-white border-2 text-white "
+                    : ""
+                } h-auto py-5 px-11 duration-200 flex items-center hover:border-2 font-medium gap-2 hover:border-white mx-5 text-center`}
+                key={key}
+              >
+                {nav}
+              </Link>
             ))}
 
             {domLoaded && cookie && (

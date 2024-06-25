@@ -31,9 +31,12 @@ export const logUser = async (payload: any) => {
 };
 
 export const getAddress = async () => {
-  const res = await axios.get(`${api}/profile`, config);
-
-  return res;
+  try {
+    const res = await axios.get(`${api}/profile`, config);
+    return res.data; // return the response data
+  } catch (error) {
+    throw error; // throw the error to be caught in the calling function
+  }
 };
 
 export const updateAddress = async (payload: any) => {
@@ -58,4 +61,52 @@ export const getProductById = async (id: string) => {
   const res = await axios.get(`${api}/product/single?id=${id}`);
 
   return res;
+};
+
+export const searchProduct = async (id: string) => {
+  const res = await axios.get(`${api}/search?query=${id}`);
+
+  return res;
+};
+
+export const fetchCart = async () => {
+  try {
+    const res = await axios.get(`${api}/cart`, config);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const addToCart = async (payload: any) => {
+  try {
+    const res = await axios.post(`${api}/cart`, payload, config);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const incrementCurrentTime = async (id: string, amount: number) => {
+  try {
+    const res = await axios.get(
+      `${api}/cart/increment?productId=${id}&amount=${amount}`
+    );
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const decrementCurrentTime = async (id: string, amount: number) => {
+  try {
+    const res = await axios.get(
+      `${api}/cart/decrement?productId=${id}&amount=${amount}`
+    );
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
 };

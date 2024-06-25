@@ -7,6 +7,9 @@ import React, { useEffect, useState } from "react";
 import Address from "./components/Address";
 import { getAddress } from "@/app/helpers/Apihelper";
 import Loading from "@/app/loading";
+import { ErrorToast } from "@/app/helpers/Toast";
+import { deleteCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 type AddressProps = {
   _id: string;
@@ -19,24 +22,35 @@ type AddressProps = {
 };
 
 const Account = () => {
+  const router = useRouter();
   const [address, setAddress] = useState<AddressProps | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchAddress = async () => {
-      const profile = await getAddress();
-      console.log(profile.data.data.profile);
+      setLoading(true);
+      setError(null); // reset error before new fetch
 
-      setAddress(profile.data.data.profile);
+      try {
+        const res = await getAddress();
+        console.log(res.data.profile);
+        setAddress(res.data.profile);
+      } catch (err: any) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchAddress();
   }, []);
 
-  console.log(address);
+  // console.log(address);
 
-  // if (!address) {
-  //   return <Loading />;
-  // }
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -50,7 +64,16 @@ const Account = () => {
           <Address currentaddress={address} />
         </div>
 
-        {address ? (
+        {error && (
+          <main className="h-[50vh] flex flex-col justify-center items-center">
+            <h1 className="text-xl font-medium">You are unauthorised. Try refreshing the page.</h1>
+            <p>If the issue persists, then go to the Login page</p>
+          </main>
+        )}
+
+        {error ? (
+          ""
+        ) : address ? (
           <main className="gap-4 grid md:grid-cols-2 ">
             <section className="border-2 p-4 space-y-2 m-4 md:m-0">
               <div className="flex justify-between">

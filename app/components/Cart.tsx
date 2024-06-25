@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sheet,
   SheetClose,
@@ -9,9 +11,25 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import { useCallback, useEffect } from "react";
 import { LuShoppingBag } from "react-icons/lu";
+import { fetchCart } from "../helpers/Apihelper";
 
 const Cart = () => {
+  const fetchCartLists = useCallback(async () => {
+    try {
+      const res = await fetchCart();
+
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchCartLists();
+  }, [fetchCartLists]);
+
   return (
     <>
       <Sheet>
@@ -87,7 +105,7 @@ const Cart = () => {
             </SheetDescription>
           </SheetHeader>
 
-          <SheetFooter >
+          <SheetFooter>
             {/* <SheetClose asChild></SheetClose> */}
             {/* <Link href={"/checkout"} className="bg-primaryColor1 absolute left-0 text-center text-white text-xl font-medium right-0 p-6 bottom-0">Checkout Now</Link> */}
           </SheetFooter>

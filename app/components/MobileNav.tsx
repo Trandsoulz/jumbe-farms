@@ -84,7 +84,7 @@ const MobileNav = () => {
   }, []);
 
   return (
-    <>
+    <main className="md:hidden block">
       {/* Navigation bar on mobile device */}
       <LuAlignJustify
         className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200"
@@ -151,7 +151,7 @@ const MobileNav = () => {
           onClick={() => setOpen(!open)}
         ></div>
       </section>
-    </>
+    </main>
   );
 };
 export default MobileNav;

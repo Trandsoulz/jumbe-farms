@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="max-w-[90rem] mx-auto bg-primaryColor1 text-white shadow-lg">
-        {/* 2nd menu */}
+        {/* 1st menu */}
 
         <div className="item bg-primaryColor text-white p-2 text-center text-xs md:text-sm">
           {" "}
@@ -51,69 +51,11 @@ const Navbar = () => {
             </span>{" "}
           </h1>
         </div>
-        {/* 2nd menu */}
-        {/*  1st menu */}
-        <nav className=" py-4 px-8 h-auto items-center justify-between border-b-2 border-gray-500 md:flex hidden">
-          {/* Nav links new, men, women, day series */}
-          {/* <nav className="space-x-5">
-            {navLink1.map(({ name, href, key }) => (
-              <Link
-                href={href}
-                key={key}
-                className={`${
-                  pathname === `${href}` ? "active" : ""
-                } hover:underline underline-offset-1 duration-200 hover:text-primaryColor decoration-primaryColor`}
-              >
-                {name}
-              </Link>
-            ))}
-          </nav> */}
-
-          {/* Logo */}
-          <nav className="day-logo ">
-            <Link href={"/"}>
-              <Image
-                priority
-                src={"/logo.png"}
-                width={65}
-                height={60}
-                alt="logo"
-                className={` ${
-                  sticky ? "w-[30px]" : ""
-                } duration-200 hover:scale-110`}
-              />
-            </Link>
-          </nav>
-
-          {/* Cart and search and saved items and account & currency */}
-          <nav className="flex h-auto items-center space-x-6">
-            <Link
-              href={"/account"}
-              className="hover:underline underline-offset-1 duration-200 hover:text-primaryColor3 decoration-primaryColor3"
-            >
-              My Account
-            </Link>
-            <Link
-              href={"/saved"}
-              className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200"
-            >
-              {" "}
-              <LuHeart className="hover:text-primaryColor3 duration-200" />
-            </Link>
-            <Link
-              href={"/search"}
-              className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200"
-            >
-              {" "}
-              <LuSearch className="hover:text-primaryColor3 duration-200" />
-            </Link>
-            <Cart />
-          </nav>
-        </nav>
+        {/* 1st menu */}
 
         {/* Mobile menu */}
-        <nav className="md:hidden flex justify-between border-b-2 border-gray-500 p-4">
-          <nav className="day-logo md:hidden flex gap-2 h-auto items-center">
+        <nav className=" flex justify-between border-b-2 border-gray-500 p-4">
+          <nav className="day-logo flex gap-2 h-auto items-center">
             <MobileNav />
 
             {/* <MobileNav /> */}
@@ -123,12 +65,12 @@ const Navbar = () => {
               <Image
                 priority
                 src={"/logo.png"}
-                width={50}
-                height={56}
+                width={55}
+                height={50}
                 alt="logo"
                 className={` ${
-                  sticky ? "w-[30px]" : ""
-                } duration-200 hover:scale-110`}
+                  sticky ? "w-[30px] " : " md:w-[65px] "
+                } duration-200 hover:scale-110 `}
               />
             </Link>
           </nav>
@@ -137,7 +79,13 @@ const Navbar = () => {
           <nav className="flex h-auto items-center space-x-6">
             <Link
               href={"/account"}
-              className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200"
+              className="hover:underline underline-offset-1 duration-200 hover:text-primaryColor3 decoration-primaryColor3 md:block hidden"
+            >
+              My Account
+            </Link>
+            <Link
+              href={"/account"}
+              className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200 md:hidden block"
             >
               <LuUser className="hover:text-primaryColor duration-200" />
             </Link>
@@ -159,11 +107,69 @@ const Navbar = () => {
           </nav>
         </nav>
         {/* Mobile menu */}
-
-        {/*  1st menu */}
       </nav>
     </>
   );
 };
 
 export default Navbar;
+
+// {/*  2nd menu */}
+// <nav className=" py-4 px-8 h-auto items-center justify-between border-b-2 border-gray-500 md:flex hidden">
+// {/* Nav links new, men, women, day series */}
+// {/* <nav className="space-x-5">
+//   {navLink1.map(({ name, href, key }) => (
+//     <Link
+//       href={href}
+//       key={key}
+//       className={`${
+//         pathname === `${href}` ? "active" : ""
+//       } hover:underline underline-offset-1 duration-200 hover:text-primaryColor decoration-primaryColor`}
+//     >
+//       {name}
+//     </Link>
+//   ))}
+// </nav> */}
+
+// {/* Logo */}
+// <nav className="day-logo ">
+//   <Link href={"/"}>
+//     <Image
+//       priority
+//       src={"/logo.png"}
+//       width={65}
+//       height={60}
+//       alt="logo"
+//       className={` ${
+//         sticky ? "w-[30px]" : ""
+//       } duration-200 hover:scale-110`}
+//     />
+//   </Link>
+// </nav>
+
+// {/* Cart and search and saved items and account & currency */}
+// <nav className="flex h-auto items-center space-x-6">
+//   <Link
+//     href={"/account"}
+//     className="hover:underline underline-offset-1 duration-200 hover:text-primaryColor3 decoration-primaryColor3"
+//   >
+//     My Account
+//   </Link>
+//   <Link
+//     href={"/saved"}
+//     className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200"
+//   >
+//     {" "}
+//     <LuHeart className="hover:text-primaryColor3 duration-200" />
+//   </Link>
+//   <Link
+//     href={"/search"}
+//     className="scale-[1.4] active:scale-[1.3] hover:scale-[1.6] duration-200"
+//   >
+//     {" "}
+//     <LuSearch className="hover:text-primaryColor3 duration-200" />
+//   </Link>
+//   <Cart />
+// </nav>
+// </nav>
+// {/*  2nd menu */}

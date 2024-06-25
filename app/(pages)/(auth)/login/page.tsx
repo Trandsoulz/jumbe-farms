@@ -47,8 +47,9 @@ const Login = () => {
       const token = res?.data?.data?.token;
       setCookie("x-auth-token", `${token}`);
 
-      router.push("/account");
-      router.refresh();
+      setTimeout(() => {
+        router.replace("/account");
+      }, 2000);
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");
