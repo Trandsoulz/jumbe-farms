@@ -7,7 +7,7 @@ import { getCookie } from "cookies-next";
 //   VerficationProps,
 // } from "../types/authprops";
 
-const api: string | undefined = process.env.NEXT_PUBLIC_API_LINK;
+const api: string = "https://api.jumbo.farm/api/v1";
 const token = getCookie("x-auth-token");
 
 const config: any = {

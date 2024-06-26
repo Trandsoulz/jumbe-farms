@@ -39,7 +39,7 @@ const Address: React.FC<AddressProps> = ({ currentaddress }) => {
     setTimeout(() => {
       setAddress(currentaddress);
     }, 5000);
-  }, [address, currentaddress]);
+  }, [currentaddress]);
 
   const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
     setAddress({
