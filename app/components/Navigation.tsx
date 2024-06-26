@@ -18,7 +18,6 @@ const Navigation = ({ children }: { children: React.ReactNode }) => {
   const cookie = getCookie("x-auth-token");
 
   const LogOut = () => {
-    router.refresh();
     deleteCookie("x-auth-token");
     router.refresh();
   };

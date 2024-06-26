@@ -146,6 +146,7 @@ const Cart = () => {
                             <button
                               className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30"
                               disabled={quantity <= 1 || quantity >= 9}
+                              onClick={() => decrementItem(_id, quantity - 1)}
                             >
                               <FaMinus />
                             </button>

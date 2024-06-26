@@ -13,7 +13,7 @@ const SavedPage = () => {
       </nav>
 
       <Navigation>
-        {/*  <main className="flex justify-center items-center lg:h-[40vh] h-[70vh]">
+         <main className="flex justify-center items-center lg:h-[40vh] h-[70vh]">
           <div className="text-center">
             <h1>You dont have any saved items.</h1>
             <h1>Continue shopping, to save an item. </h1>
@@ -22,11 +22,11 @@ const SavedPage = () => {
               Categories
             </Link>
           </div>
-        </main> */}
-
-        <main>
-          
         </main>
+
+        {/* <main>
+
+        </main> */}
       </Navigation>
 
       {/* footer section */}
