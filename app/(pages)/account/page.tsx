@@ -65,9 +65,13 @@ const Account = () => {
         </div>
 
         {error && (
-          <main className="h-[50vh] flex flex-col justify-center items-center">
-            <h1 className="text-xl font-medium">You are unauthorised. Try refreshing the page.</h1>
-            <p>If the issue persists, then go to the Login page</p>
+          <main className="h-[50vh] flex flex-col justify-center items-center text-center">
+            <h1 className="md:text-xl text-base font-medium">
+              You are unauthorised. Try refreshing the page.
+            </h1>
+            <p className="text-base">
+              If the issue persists, then go to the Login page
+            </p>
           </main>
         )}
 

@@ -182,7 +182,7 @@ const Cart = () => {
               // @ts-ignore
               <PaystackButton
                 {...componentProps}
-                className="bg-primaryColor1 text-white mt-5 text-xl md:py-4 w-full py-7"
+                className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4"
               />
             )}
             {/* <SheetClose asChild></SheetClose> */}
