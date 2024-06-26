@@ -8,6 +8,8 @@ import { getCookie } from "cookies-next";
 // } from "../types/authprops";
 
 const api: string | undefined = process.env.NEXT_PUBLIC_API_LINK;
+
+
 const token = getCookie("x-auth-token");
 
 const config: any = {

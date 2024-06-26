@@ -4,7 +4,7 @@ import Navigation from "@/app/components/Navigation";
 import Link from "next/link";
 import React from "react";
 
-const page = () => {
+const Order = () => {
   return (
     <>
       {/* Navigation panel */}
@@ -13,7 +13,7 @@ const page = () => {
       </nav>
 
       <Navigation>
-        <main className="flex justify-center items-center lg:h-[40vh] h-[70vh]">
+        <main className="flex justify-center items-center lg:h-[60vh] h-[70vh]">
           <div className="text-center">
             <h1>You dont have any orders.</h1>
             <h1>Continue shopping, to order an item. </h1>
@@ -33,4 +33,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Order;

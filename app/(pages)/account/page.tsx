@@ -60,12 +60,12 @@ const Account = () => {
       </nav>
       <Navigation>
         <div className="flex justify-between py-4 px-3">
-          <h1 className="text-2xl ">Account overview</h1>
+          <h1 className="text-xl md:text-2xl ">Account overview</h1>
           <Address currentaddress={address} />
         </div>
 
         {error && (
-          <main className="h-[50vh] flex flex-col justify-center items-center text-center">
+          <main className="h-[60vh] flex flex-col justify-center items-center text-center">
             <h1 className="md:text-xl text-base font-medium">
               You are unauthorised. Try refreshing the page.
             </h1>

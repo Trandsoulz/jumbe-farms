@@ -11,6 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { PaystackButton } from "react-paystack";
+import { AiOutlineLoading } from "react-icons/ai";
 import { useCallback, useEffect, useState } from "react";
 import { LuShoppingBag } from "react-icons/lu";
 import {
@@ -25,44 +26,60 @@ import { useRouter } from "next/navigation";
 import { ErrorToast, SuccessToast } from "../helpers/Toast";
 
 const Cart = () => {
+  const [cart, setCart] = useState([]);
+  const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
+
   const router = useRouter();
   const publicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY;
-  const totalPrice = 100000;
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const [cart, setCart] = useState([]);
-
-  const fetchCartLists = useCallback(async () => {
+  const fetchCartInCart = async () => {
     try {
       const res = await fetchCart();
       const cartItems = res.data.data.cart.items;
+      const totalPrice = res.data.data.cart.totalPrice;
+      setTotalPrice(totalPrice);
       setCart(cartItems);
 
-      console.log(res.data.data.cart);
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const fetchCartLists = useCallback(async () => {
+    await fetchCartInCart();
   }, []);
 
   useEffect(() => {
     fetchCartLists();
   }, [fetchCartLists]);
 
+  // Increment Item in the cart
   const incrementItem = async (id: string, amount: number) => {
     try {
       const res = await incrementCurrentItem(id, amount);
       console.log(res);
+      setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
+      await fetchCartInCart();
+      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       router.refresh();
     } catch (error) {
+      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       console.log(error);
     }
   };
-
+  // Decrement Item in the cart
   const decrementItem = async (id: string, amount: number) => {
     try {
       const res = await decrementCurrentItem(id, amount);
       console.log(res);
+      setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
+      await fetchCartInCart();
+      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       router.refresh();
     } catch (error) {
+      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       console.log(error);
     }
   };
@@ -130,7 +147,7 @@ const Cart = () => {
                           ) : (
                             <Image
                               src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${product.images[0]}`}
-                              alt={`image of ${name}`}
+                              alt={`image of ${product.name}`}
                               priority
                               height={100}
                               width={150}
@@ -144,18 +161,26 @@ const Cart = () => {
 
                           <div className="border-2 border-primaryColor1 flex text-center w-fit">
                             <button
-                              className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30"
-                              disabled={quantity <= 1 || quantity >= 9}
-                              onClick={() => decrementItem(_id, quantity - 1)}
+                              className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30 active:bg-primaryColor2"
+                              disabled={quantity <= 1 || loading[product._id]}
+                              onClick={() => decrementItem(product._id, 1)}
                             >
                               <FaMinus />
                             </button>
                             <Separator orientation="vertical" />
-                            <h1 className="w-[25px]"> {quantity} </h1>
+                            <h1 className="w-[25px] text-center flex justify-center">
+                              {" "}
+                              {loading[product._id] ? (
+                                <AiOutlineLoading className="animate-spin my-1" />
+                              ) : (
+                                quantity
+                              )}{" "}
+                            </h1>
                             <Separator orientation="vertical" />
                             <button
-                              className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:bg-primaryColor2"
-                              onClick={() => incrementItem(_id, quantity + 1)}
+                              className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30 active:bg-primaryColor2"
+                              disabled={quantity >= 15 || loading[product._id]}
+                              onClick={() => incrementItem(product._id, 1)}
                             >
                               <FaPlus />
                             </button>

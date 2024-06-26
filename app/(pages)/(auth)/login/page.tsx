@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import Navbar from "@/app/components/Navbar";
 import { logUser } from "@/app/helpers/Apihelper";
 import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
-import { setCookie } from "cookies-next";
+import { getCookie, setCookie } from "cookies-next";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -40,14 +40,27 @@ const Login = () => {
       const res = await logUser(loginDetails);
       console.log(res);
 
-      setLoading("Redirecting...");
-      SuccessToast("Welcome Back");
-
-      // Get bearer token from req.body and set it to cookies
+      // Get bearer token from response and set it to cookies
       const token = res?.data?.data?.token;
-      setCookie("x-auth-token", token);
 
-      router.replace("/account");
+      // Ensure the token is present
+      if (token) {
+        setCookie("x-auth-token", token);
+
+        // Verify if the cookie is set correctly
+        const cookieToken = getCookie("x-auth-token");
+        if (cookieToken) {
+          setLoading("Redirecting...");
+          SuccessToast("Welcome Back");
+
+          // Redirect to account page
+          router.replace("/account");
+        } else {
+          throw new Error("Failed to set authentication token.");
+        }
+      } else {
+        throw new Error("Invalid login response: Token not found.");
+      }
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");
