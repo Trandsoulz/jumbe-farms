@@ -22,7 +22,7 @@ const Login = () => {
     password: "",
   });
 
-  const handleInput = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
     setloginDetails({
       ...loginDetails,
       [e.target.name]: e.target.value,
@@ -45,11 +45,9 @@ const Login = () => {
 
       // Get bearer token from req.body and set it to cookies
       const token = res?.data?.data?.token;
-      setCookie("x-auth-token", `${token}`);
+      setCookie("x-auth-token", token);
 
-      setTimeout(() => {
-        router.replace("/account");
-      }, 2000);
+      router.replace("/account");
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");

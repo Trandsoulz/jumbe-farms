@@ -20,6 +20,7 @@ const Navigation = ({ children }: { children: React.ReactNode }) => {
   const LogOut = () => {
     router.refresh();
     deleteCookie("x-auth-token");
+    router.refresh();
   };
 
   const [domLoaded, setDomLoaded] = useState(false);
@@ -40,20 +41,27 @@ const Navigation = ({ children }: { children: React.ReactNode }) => {
                   pathname === `${href}`
                     ? " border-white border-2 text-white "
                     : ""
-                } h-auto py-5 px-11 duration-200 flex items-center hover:border-2 font-medium gap-2 hover:border-white mx-5 text-center`}
+                } h-auto py-5 px-11 duration-200 flex items-center border-primaryColor1 border-2 font-medium gap-2 hover:border-white mx-5 text-center`}
                 key={key}
               >
                 {nav}
               </Link>
             ))}
 
-            {domLoaded && cookie && (
+            {domLoaded && cookie ? (
               <button
                 onClick={LogOut}
-                className={`h-auto py-5 px-11 duration-200 flex items-center hover:border-2 font-medium gap-2 hover:border-white mx-5 text-center`}
+                className={`h-auto py-5 px-11 duration-200 flex items-center border-primaryColor1 border-2 font-medium gap-2 hover:border-white mx-5 text-center`}
               >
                 LogOut
               </button>
+            ) : (
+              <Link
+                href={"/login"}
+                className="`h-auto py-5 px-11 duration-200 flex items-center border-primaryColor1 border-2 font-medium gap-2 hover:border-white mx-5 text-cente"
+              >
+                Login
+              </Link>
             )}
           </nav>
         </main>

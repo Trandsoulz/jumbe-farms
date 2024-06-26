@@ -7,7 +7,7 @@ import { getCookie } from "cookies-next";
 //   VerficationProps,
 // } from "../types/authprops";
 
-const api: string = "https://api.jumbo.farm/api/v1";
+const api: string | undefined = process.env.NEXT_PUBLIC_API_LINK;
 const token = getCookie("x-auth-token");
 
 const config: any = {
@@ -87,7 +87,7 @@ export const addToCart = async (payload: any) => {
   }
 };
 
-export const incrementCurrentTime = async (id: string, amount: number) => {
+export const incrementCurrentItem = async (id: string, amount: number) => {
   try {
     const res = await axios.get(
       `${api}/cart/increment?productId=${id}&amount=${amount}`,
@@ -100,7 +100,7 @@ export const incrementCurrentTime = async (id: string, amount: number) => {
   }
 };
 
-export const decrementCurrentTime = async (id: string, amount: number) => {
+export const decrementCurrentItem = async (id: string, amount: number) => {
   try {
     const res = await axios.get(
       `${api}/cart/decrement?productId=${id}&amount=${amount}`,
