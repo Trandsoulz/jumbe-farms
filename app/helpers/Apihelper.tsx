@@ -9,7 +9,6 @@ import { getCookie } from "cookies-next";
 
 const api: string | undefined = process.env.NEXT_PUBLIC_API_LINK;
 
-
 const token = getCookie("x-auth-token");
 
 const config: any = {
@@ -108,6 +107,15 @@ export const decrementCurrentItem = async (id: string, amount: number) => {
       `${api}/cart/decrement?productId=${id}&amount=${amount}`,
       config
     );
+
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+export const deleteCartItem = async (id: string) => {
+  try {
+    const res = await axios.delete(`${api}/cart/?productId=${id}`, config);
 
     return res;
   } catch (error) {
