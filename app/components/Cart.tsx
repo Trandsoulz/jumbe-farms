@@ -26,6 +26,7 @@ import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import { ErrorToast, SuccessToast } from "../helpers/Toast";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { initialize } from "next/dist/server/lib/render-server";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -68,7 +69,6 @@ const Cart = () => {
       setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
       await fetchCartInCart();
       setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-      router.refresh();
     } catch (error) {
       setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       console.log(error);
@@ -82,7 +82,6 @@ const Cart = () => {
       setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
       await fetchCartInCart();
       setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-      router.refresh();
     } catch (error) {
       setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       console.log(error);
@@ -97,7 +96,6 @@ const Cart = () => {
       // setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
       await fetchCartInCart();
       // setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-      router.refresh();
     } catch (error) {
       // setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
       console.log(error);
@@ -105,19 +103,19 @@ const Cart = () => {
   };
 
   // Paystack
-  // const componentProps = {
-  //   email: user?.email,
-  //   amount: totalPrice * 100,
-  //   metadata: {
-  //     name: user?.name,
-  //     // number: "08113848299",
-  //   },
-  //   publicKey,
-  //   text: "Check Out",
-  //   onSuccess: () =>
-  //     SuccessToast("Thanks for doing business with us! Come back soon!!"),
-  //   onClose: () => ErrorToast("Wait! Don't leave "),
-  // };
+  const componentProps = {
+    email: user?.email,
+    amount: totalPrice * 100,
+    metadata: {
+      name: user?.name,
+      // number: "08113848299",
+    },
+    publicKey,
+    text: "Check Out",
+    onSuccess: () =>
+      SuccessToast("Thanks for doing business with us! Come back soon!!"),
+    onClose: () => ErrorToast("Wait! Don't leave "),
+  };
 
   const config = {
     email: user?.email,
@@ -146,7 +144,7 @@ const Cart = () => {
   };
 
   // @ts-ignore
-  const PayStack = usePaystackPayment(config);
+  const initializePayment = usePaystackPayment(config);
 
   return (
     <>
@@ -264,19 +262,21 @@ const Cart = () => {
             <SheetFooter>
               <SheetClose asChild>
                 {/* @ts-ignore */}
-                <button
+                {/* <button
                   onClick={() => {
                     // @ts-ignore
-                    PayStack(onSuccess, onClose);
+                    initializePayment(onSuccess, onClose);
                   }}
                   className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4"
                 >
                   Check Out
-                </button>
-                {/* <PaystackButton
+                </button> */}
+
+                {/* @ts-ignore */}
+                <PaystackButton
                   {...componentProps}
                   className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4"
-                /> */}
+                />
               </SheetClose>
             </SheetFooter>
           )}

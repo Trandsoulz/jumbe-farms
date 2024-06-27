@@ -91,7 +91,9 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
       const res = await addToCart(items);
       console.log(res.data.message);
       SuccessToast(res.data.message);
-      router.refresh();
+      // router.refresh();
+      //Force a hard reload to clear the cache if supported by the browser
+      window.location.reload();
     } catch (error: any) {
       console.log(error);
       ErrorToast(error.response.data.message);

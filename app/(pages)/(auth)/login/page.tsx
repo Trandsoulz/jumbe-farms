@@ -54,7 +54,8 @@ const Login = () => {
           SuccessToast("Welcome Back");
 
           // Redirect to account page
-          router.replace("/account");
+          // router.replace("/account");
+          window.location.pathname = "/account";
         } else {
           throw new Error("Failed to set authentication token.");
         }
