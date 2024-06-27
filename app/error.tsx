@@ -25,7 +25,7 @@ export default function Error({
           </p>
 
           <button
-            onClick={() => router.refresh()}
+            onClick={() => window.location.reload()}
             className="mt-6 inline-block rounded bg-primaryColor px-5 py-3 text-sm font-medium text-white hover:bg-primaryColor focus:outline-none focus:ring"
           >
             Try Again

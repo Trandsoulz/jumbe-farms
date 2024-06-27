@@ -113,10 +113,38 @@ export const decrementCurrentItem = async (id: string, amount: number) => {
     throw error;
   }
 };
+
+export const deleteCart = async () => {
+  try {
+    const res = await axios.delete(`${api}/cart/all`, config);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const deleteCartItem = async (id: string) => {
   try {
     const res = await axios.delete(`${api}/cart/?productId=${id}`, config);
 
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createOrder = async (payload: any) => {
+  try {
+    const res = await axios.post(`${api}/order`, payload, config);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getAllOrders = async () => {
+  try {
+    const res = await axios.get(`${api}/order`, config);
     return res;
   } catch (error) {
     throw error;

@@ -74,7 +74,8 @@ const MobileNav = () => {
 
   const LogOut = () => {
     deleteCookie("x-auth-token");
-    router.refresh();
+    // router.refresh();
+    window.location.reload();
   };
 
   const [domLoaded, setDomLoaded] = useState(false);

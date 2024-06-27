@@ -15,7 +15,9 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { useCallback, useEffect, useState } from "react";
 import { LuShoppingBag } from "react-icons/lu";
 import {
+  createOrder,
   decrementCurrentItem,
+  deleteCart,
   deleteCartItem,
   fetchCart,
   incrementCurrentItem,
@@ -101,6 +103,30 @@ const Cart = () => {
     }
   };
 
+  // Create Order & Delete Cart
+  const createUserOrder = async () => {
+    try {
+      const order = {
+        items: cart,
+        totalPrice,
+      };
+      const res = await createOrder(order);
+      const deletedCart = await deleteCart();
+      console.log("This is the cart that has been deleted ", deletedCart);
+      console.log("This is the order ", res);
+
+      // Set Success Toast.
+      SuccessToast("Thanks for doing business with us! Come back soon!!");
+
+      // Reload page
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Paystack
   const componentProps = {
     email: user?.email,
@@ -111,8 +137,8 @@ const Cart = () => {
     },
     publicKey,
     text: "Check Out",
-    onSuccess: () =>
-      SuccessToast("Thanks for doing business with us! Come back soon!!"),
+    onSuccess: () => createUserOrder(),
+    // SuccessToast("Thanks for doing business with us! Come back soon!!"),
     onClose: () => ErrorToast("Wait! Don't leave "),
   };
 
@@ -273,10 +299,7 @@ const Cart = () => {
 
                 <button className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4">
                   {/* @ts-ignore */}
-                  <PaystackButton
-                    {...componentProps}
-                    
-                  />
+                  <PaystackButton {...componentProps} />
                 </button>
               </SheetClose>
             </SheetFooter>
