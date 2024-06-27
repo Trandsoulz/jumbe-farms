@@ -26,7 +26,6 @@ import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import { ErrorToast, SuccessToast } from "../helpers/Toast";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { initialize } from "next/dist/server/lib/render-server";
 
 const Cart = () => {
   const [cart, setCart] = useState([]);
@@ -272,11 +271,13 @@ const Cart = () => {
                   Check Out
                 </button> */}
 
-                {/* @ts-ignore */}
-                <PaystackButton
-                  {...componentProps}
-                  className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4"
-                />
+                <button className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4">
+                  {/* @ts-ignore */}
+                  <PaystackButton
+                    {...componentProps}
+                    
+                  />
+                </button>
               </SheetClose>
             </SheetFooter>
           )}

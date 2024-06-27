@@ -49,7 +49,7 @@ const Signup = () => {
       setCookie("x-auth-token", `${token}`);
 
       router.refresh();
-      router.push("/account");
+      window.location.pathname = "/account";
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");

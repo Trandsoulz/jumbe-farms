@@ -46,7 +46,7 @@ const Account = () => {
     fetchAddress();
   }, []);
 
-  // console.log(address);
+  console.log(address);
 
   if (loading) {
     return <Loading />;
@@ -77,7 +77,7 @@ const Account = () => {
 
         {error ? (
           ""
-        ) : address ? (
+        ) : address?.full_name ? (
           <main className="gap-4 grid md:grid-cols-2 ">
             <section className="border-2 p-4 space-y-2 m-4 md:m-0">
               <div className="flex justify-between">
