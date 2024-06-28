@@ -28,8 +28,10 @@ import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 import { ErrorToast, SuccessToast } from "../helpers/Toast";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { useCartIdStore } from "../store/Store";
 
 const Cart = () => {
+  const { setCartId } = useCartIdStore();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [user, setUser] = useState<any>();
@@ -48,7 +50,14 @@ const Cart = () => {
       setCart(cartItems);
       setUser(user);
 
-      console.log(res.data);
+      // Get all the productIds in the cart and set them to a global state
+      const productIds = cartItems.map(({ product }: any) => {
+        return product._id;
+      });
+
+      // console.log(productIds);
+      setCartId(productIds);
+      // Get all the productIds in the cart and set them to a global state
     } catch (error) {
       console.log(error);
     }

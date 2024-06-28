@@ -1,11 +1,20 @@
 import { create } from "zustand";
 
-interface StoreInterface {
-  state: string;
-  setState: (state: string) => void;
+interface CartIdsStoreProps {
+  cartId: string[];
+  setCartId: (cartId: string[]) => void;
+  isInCart: (id: string) => boolean;
 }
 
-export const Store = create<StoreInterface>((set) => ({
-  state: "",
-  setState: (state) => set({ state }),
+// It seets an array of product Ids to cart, and it also checks if the productpage id is in the cart
+export const useCartIdStore = create<CartIdsStoreProps>((set, get) => ({
+  cartId: [],
+  setCartId: (cartId) =>
+    set(() => ({
+      cartId: cartId,
+    })),
+  isInCart: (id) => {
+    const { cartId } = get();
+    return cartId.includes(id);
+  },
 }));

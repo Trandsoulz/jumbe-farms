@@ -150,3 +150,21 @@ export const getAllOrders = async () => {
     throw error;
   }
 };
+
+export const getSavedItems = async () => {
+  try {
+    const res = await axios.get(`${api}/saved`, config);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const saveItem = async (productId: string) => {
+  try {
+    const res = await axios.post(`${api}/saved?productId=${productId}`, config);
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};

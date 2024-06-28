@@ -13,8 +13,9 @@ const Order = () => {
   const [orders, setOrders] = useState<any>([]);
   const fetchAllOrders = async () => {
     const order = await getAllOrders();
-    setOrders(order.data.data.orders);
-    console.log(order.data.data.orders);
+    const orderReversed = order.data.data.orders.reverse();
+    setOrders(orderReversed);
+    console.log(orderReversed);
   };
 
   useEffect(() => {

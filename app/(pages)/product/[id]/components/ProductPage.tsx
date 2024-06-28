@@ -25,10 +25,15 @@ import {
 } from "@/components/ui/breadcrumb";
 import ProductCard from "@/app/(pages)/home/components/RecentProduct";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { addToCart, getProductsByCategories } from "@/app/helpers/Apihelper";
+import {
+  addToCart,
+  getProductsByCategories,
+  saveItem,
+} from "@/app/helpers/Apihelper";
 import ProductComponent from "@/app/(pages)/home/components/ProductComp";
 import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
 import { useRouter } from "next/navigation";
+import { useCartIdStore } from "@/app/store/Store";
 
 type ProductProps = {
   product: any;
@@ -36,6 +41,8 @@ type ProductProps = {
 
 const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
   const router = useRouter();
+  // Get array of product Ids inside the cart
+  const { isInCart } = useCartIdStore();
   const { category, images, name, price, size, _id } = product;
 
   //   const [products, setProducts] = useState([]);
@@ -84,19 +91,35 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
   const items: any = {
     item: { product: _id, quantity: 1 },
   };
-  console.log;
 
+  // Check if Id is inside the cart
+  const productIsInCart = isInCart(_id);
+
+  // Add item to cart
   const addItemToCart = async () => {
     try {
       const res = await addToCart(items);
-      console.log(res.data.message);
+      // console.log(res.data.message);
       SuccessToast(res.data.message);
       // router.refresh();
       //Force a hard reload to clear the cache if supported by the browser
       window.location.reload();
     } catch (error: any) {
       console.log(error);
-      ErrorToast(error.response.data.message);
+      // ErrorToast(error.response.data.error);
+      // ErrorToast("You're not logged In. Click on Account, to Login");
+    }
+  };
+
+  // Add Item to saved
+  const addItemToSave = async () => {
+    try {
+      const res = await saveItem(_id);
+      console.log(res.data.message);
+      SuccessToast(res.data.message);
+    } catch (error: any) {
+      console.log(error);
+      ErrorToast("You're not logged In. Click on Account, to Login");
     }
   };
 
@@ -242,15 +265,16 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
             <div className="flex space-x-6">
               <button
                 onClick={addItemToCart}
-                className="w-[80%] bg-primaryColor px-5 py-3 text-white"
+                className="w-[80%] bg-primaryColor px-5 py-3 text-white disabled:opacity-30 disabled:cursor-not-allowed "
+                disabled={productIsInCart}
               >
                 {" "}
                 <h1 className="duration-200 hover:scale-[1.2] active:scale-90">
-                  Add to Cart{" "}
+                  {!productIsInCart ? " Add to Cart " : "Added to Cart"}
                 </h1>
               </button>
               <button
-                onClick={() => alert("Added to saved")}
+                onClick={addItemToSave}
                 className="w-[20%] bg-primaryColor px-5 py-3 text-xl text-white"
               >
                 <IoHeart className="inline-flex justify-center duration-200 hover:scale-125 active:scale-90" />
