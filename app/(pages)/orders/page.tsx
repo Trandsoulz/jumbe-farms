@@ -61,9 +61,7 @@ const Order = () => {
 
                   <h1 className="text-sm md:text-base">
                     Order Status :{" "}
-                    {fulfilled
-                      ? "Your order has been delivered"
-                      : "Not delivered"}
+                    {fulfilled ? "Order Fulfilled" : "Not delivered"}
                   </h1>
                 </div>
 
