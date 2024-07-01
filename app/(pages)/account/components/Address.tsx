@@ -160,7 +160,7 @@ const Address: React.FC<AddressProps> = ({ currentaddress }) => {
                     <h1 className="relative top-3 pl-3">+234</h1>
                     <input
                       type="text"
-                      required
+                      // required
                       name="tel_2"
                       placeholder="812 234 4567"
                       className=" p-3 h-12 bg-transparent text-sm md:text-base block outline-none w-full"
