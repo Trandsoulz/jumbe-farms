@@ -43,7 +43,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
   const router = useRouter();
   // Get array of product Ids inside the cart
   const { isInCart } = useCartIdStore();
-  const { category, images, name, price, size, _id } = product;
+  const { category, images, name, price, size, _id, variant } = product;
 
   //   const [products, setProducts] = useState([]);
 
@@ -198,7 +198,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
           </div>
           <div className="md:w-1/2 w-full p-4">
             <h1 className="text-2xl">
-              {name} [{size}kg]
+              {name} {size >= 1 && `[${size} kg]`} [{variant}]
             </h1>
 
             <div className="flex justify-between mt-6 border-b-2 pb-2 border-slate-600 ">

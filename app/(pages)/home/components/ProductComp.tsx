@@ -22,6 +22,7 @@ interface productType {
   name: string;
   price: number;
   size: number;
+  variant: string;
 }
 [];
 
@@ -65,46 +66,49 @@ const ProductComponent: React.FC<ProductsProps> = ({ name }) => {
       >
         <CarouselContent className="">
           {products.length !== 0 &&
-            products.map(({ name, _id, size, images, price }: productType) => (
-              <CarouselItem className=" basis-1/2 lg:basis-1/3" key={_id}>
-                <div className="flex flex-col cursor-pointer md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit mb-4">
-                  <div
-                    onClick={(e) => goToProductPage(e, _id)}
-                    className="flex flex-col md:flex-row gap-2 md:gap-4 w-[150px] md:w-full"
-                  >
-                    <div className="overflow-hidden rounded-lg md:w-1/2">
-                      {images.length === 0 ? (
-                        <Image
-                          src={`/assets/jumbo-ad1.jpg`}
-                          width={400}
-                          height={400}
-                          alt={`${`rice`}`}
-                          className="w-full md:w-[150px] hover:scale-110 duration-200 rounded-lg"
-                        />
-                      ) : (
-                        <Image
-                          src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${images[0]}`}
-                          width={400}
-                          height={400}
-                          alt={name}
-                          className="w-full md:w-[150px] hover:scale-110 duration-200 rounded-lg"
-                        />
-                      )}
-                    </div>
+            products.map(
+              ({ name, _id, size, images, price, variant }: productType) => (
+                <CarouselItem className=" basis-1/2 lg:basis-1/3" key={_id}>
+                  <div className="flex flex-col cursor-pointer md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit mb-4">
+                    <div
+                      onClick={(e) => goToProductPage(e, _id)}
+                      className="flex flex-col md:flex-row gap-2 md:gap-4 w-[150px] md:w-full"
+                    >
+                      <div className="overflow-hidden rounded-lg md:w-1/2">
+                        {images.length === 0 ? (
+                          <Image
+                            src={`/assets/jumbo-ad1.jpg`}
+                            width={400}
+                            height={400}
+                            alt={`${`rice`}`}
+                            className="w-full md:w-[150px] hover:scale-110 duration-200 rounded-lg"
+                          />
+                        ) : (
+                          <Image
+                            src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${images[0]}`}
+                            width={400}
+                            height={400}
+                            alt={name}
+                            className="w-full md:w-[150px] hover:scale-110 duration-200 rounded-lg"
+                          />
+                        )}
+                      </div>
 
-                    <div className="md:w-1/2 flex flex-col">
-                      <h1 className="flex items-center font-medium text-sm ">
-                        {name}
-                      </h1>
-                      <h1>{size}kg </h1>
-                      <p className="text-sm md:text-base">
-                        ₦{`${price.toLocaleString("en-US")}`}
-                      </p>
-                      <div className="h-full" />
-                      <button className="bg-primaryColor1 addToCart text-white py-2 px-4 rounded hover:scale-110 duration-200 active:scale-90 text-sm ">
-                        Add to Cart
-                      </button>
-                      {/* <div >
+                      <div className="md:w-1/2 flex flex-col">
+                        <h1 className="flex items-center font-medium text-sm ">
+                          {name}
+                        </h1>
+                        <h1>
+                          {size >= 1 && `[${size} kg]`} {variant}
+                        </h1>
+                        <p className="text-sm md:text-base">
+                          ₦{`${price.toLocaleString("en-US")}`}
+                        </p>
+                        <div className="h-full" />
+                        <button className="bg-primaryColor1 addToCart text-white py-2 px-4 rounded hover:scale-110 duration-200 active:scale-90 text-sm ">
+                          Add to Cart
+                        </button>
+                        {/* <div >
                   <Rate
                     disabled
                     defaultValue={5}
@@ -112,15 +116,16 @@ const ProductComponent: React.FC<ProductsProps> = ({ name }) => {
                   />
                   <h3 className="hidden md:block text-sm">Excellent</h3>
                 </div> */}
+                      </div>
                     </div>
-                  </div>
 
-                  {/* <button className="bg-primaryColor1 h-fit w-full md:w-[150px] text-white p-2 rounded hover:scale-110 duration-200 active:scale-90 text-sm py-2 px-4 ">
+                    {/* <button className="bg-primaryColor1 h-fit w-full md:w-[150px] text-white p-2 rounded hover:scale-110 duration-200 active:scale-90 text-sm py-2 px-4 ">
               Add to Cart
             </button> */}
-                </div>
-              </CarouselItem>
-            ))}
+                  </div>
+                </CarouselItem>
+              )
+            )}
         </CarouselContent>
       </Carousel>
     </>
