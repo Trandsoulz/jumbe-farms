@@ -10,6 +10,8 @@ import MobileCategories from "./components/MobileCategories";
 import { getCategories } from "@/app/helpers/Apihelper";
 import Products from "./components/Products";
 
+export const revalidate = 0;
+
 const Homepage = async () => {
   const categories = await getCategories();
   return (

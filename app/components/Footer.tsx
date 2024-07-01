@@ -8,7 +8,12 @@ import {
   FaCcStripe,
   FaCcVisa,
 } from "react-icons/fa";
-import { FaXTwitter, FaFacebook, FaInstagram } from "react-icons/fa6";
+import {
+  FaXTwitter,
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+} from "react-icons/fa6";
 import { VscSend } from "react-icons/vsc";
 
 type FooterType = {
@@ -190,6 +195,14 @@ const Footer = () => {
               href={"https://www.instagram.com/"}
             >
               <FaInstagram className="footer-icons" />
+            </Link>
+
+            <Link
+              target="_blank"
+              rel="noreferrer"
+              href={"https://www.instagram.com/"}
+            >
+              <FaWhatsapp className="footer-icons" />
             </Link>
           </div>
         </section>

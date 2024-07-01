@@ -12,6 +12,8 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
+export const revalidate = 0;
+
 const ProductPage = async ({ params }: { params: { id: string } }) => {
   const productsid = await getProductsByCategories(params.id);
 
@@ -33,7 +35,7 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
               <BreadcrumbLink href="/categories">Categories</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
-{/* 
+            {/* 
             <BreadcrumbItem>
               <BreadcrumbLink
                 className="capitalize"

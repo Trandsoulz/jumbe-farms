@@ -4,6 +4,8 @@ import React from "react";
 import CategoryComponent from "./components/Categories";
 import { getCategories } from "@/app/helpers/Apihelper";
 
+export const revalidate = 0
+
 const Categories = async () => {
   const categories = await getCategories();
 

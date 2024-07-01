@@ -44,9 +44,9 @@ const Navbar = () => {
             <span>
               <Link
                 className="underline decoration-white underline-offset-1"
-                href={"tel:08012345678"}
+                href={"tel:09137701799"}
               >
-                08012345678
+                09137701799
               </Link>
             </span>{" "}
           </h1>

@@ -4,6 +4,8 @@ import { getProductById } from "@/app/helpers/Apihelper";
 
 type ProductUrl = { params: { id: string } };
 
+export const revalidate = 0
+
 const ProductPage: React.FC<ProductUrl> = async ({ params }) => {
   const productDetail = await getProductById(params.id);
   // console.log(productDetail.data.data.product);
