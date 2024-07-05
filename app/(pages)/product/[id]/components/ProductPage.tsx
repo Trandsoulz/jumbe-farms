@@ -212,7 +212,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
           </div>
           <div className="md:w-1/2 w-full p-4">
             <h1 className="text-2xl">
-              {name} [{size && `${size}kg`} {variant}]
+              {name} [ {size && `${size}kg`} {variant} ]
             </h1>
 
             <div className="flex justify-between mt-6 border-b-2 pb-2 border-slate-600 ">
