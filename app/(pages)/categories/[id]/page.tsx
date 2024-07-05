@@ -35,15 +35,21 @@ const ProductPage = async ({ params }: { params: { id: string } }) => {
               <BreadcrumbLink href="/categories">Categories</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
-            {/* 
-            <BreadcrumbItem>
+
+            {/* <BreadcrumbItem>
               <BreadcrumbLink
                 className="capitalize"
                 href={`/categories/${params.id}`}
               >
-                {params.id}
+                
               </BreadcrumbLink>
             </BreadcrumbItem> */}
+
+            <BreadcrumbItem>
+              <BreadcrumbPage className="capitalize">
+                {params.id}
+              </BreadcrumbPage>
+            </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </section>

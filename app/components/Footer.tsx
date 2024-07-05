@@ -109,13 +109,13 @@ const Footer = () => {
                 <h1 className="duration-200 inline-block text-base md:text-lg">
                   <span>Nigeria:</span> Rivers, Port Harcourt{" "}
                   <span className="font-semibold">
-                    <Link href={"tel:+2347088405410"}>+23481234567</Link>
+                    <Link href={"tel:+2349137701799"}>+2349137701799</Link>
                   </span>
                 </h1>
                 <h1 className="duration-200 inline-block text-base md:text-lg">
                   <span>Nigeria:</span> Lagos, Lekki{" "}
                   <span className="font-semibold">
-                    <Link href={"tel:+23481234590"}>+23481234590 </Link>
+                    <Link href={"tel:+2348114888647"}>+2348114888647 </Link>
                   </span>
                 </h1>
               </div>

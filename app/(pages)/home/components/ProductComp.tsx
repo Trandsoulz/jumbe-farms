@@ -99,7 +99,7 @@ const ProductComponent: React.FC<ProductsProps> = ({ name }) => {
                           {name}
                         </h1>
                         <h1>
-                          {size >= 1 && `[${size}kg]`} {variant}
+                          {size && `${size}kg`} {variant}
                         </h1>
                         <p className="text-sm md:text-base">
                           ₦{`${price.toLocaleString("en-US")}`}
