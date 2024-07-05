@@ -27,13 +27,23 @@ const MobileCategories: React.FC<CategoryComponentProps> = ({ category }) => {
             className="hover:scale-110 duration-200"
           >
             <div className=" border-2 border-primaryColor1 mb-5 w-fit">
-              <Image
-                src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${image}`}
-                width={130}
-                height={100}
-                alt="rice"
-                className="w-[150px] md:w-[130px]"
-              />
+              {image ? (
+                <Image
+                  src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${image}`}
+                  width={130}
+                  height={100}
+                  alt={name}
+                  className="w-[150px] md:w-[130px]"
+                />
+              ) : (
+                <Image
+                  src={`/assets/jumbo-ad1.jpg`}
+                  width={130}
+                  height={100}
+                  alt={name}
+                  className="w-[150px] md:w-[130px]"
+                />
+              )}
 
               <div className="p-1 md:p-3 bg-primaryColor1">
                 <h1 className="font-medium text-white text-center capitalize">
