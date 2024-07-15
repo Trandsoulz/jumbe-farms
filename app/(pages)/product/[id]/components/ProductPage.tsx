@@ -103,11 +103,13 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
       SuccessToast(res.data.message);
       // router.refresh();
       //Force a hard reload to clear the cache if supported by the browser
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error: any) {
       console.log(error);
       // ErrorToast(error.response.data.error);
-      // ErrorToast("You're not logged In. Click on Account, to Login");
+      ErrorToast("You're not logged In. Click on Account, to Login");
     }
   };
 

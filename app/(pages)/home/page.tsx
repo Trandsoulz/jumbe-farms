@@ -7,13 +7,17 @@ import ProductCard from "./components/RecentProduct";
 import PopularProduct from "./components/PopularProduct";
 import Footer from "@/app/components/Footer";
 import MobileCategories from "./components/MobileCategories";
-import { getCategories } from "@/app/helpers/Apihelper";
+import { getCategories, getProducts } from "@/app/helpers/Apihelper";
 import Products from "./components/Products";
 
 export const revalidate = 0;
 
 const Homepage = async () => {
   const categories = await getCategories();
+  const recentOrders = await getProducts();
+  const popularOrders = await getProducts();
+ 
+
   return (
     <>
       <nav className="sticky top-0 z-10">
@@ -56,7 +60,7 @@ const Homepage = async () => {
         </h1>
 
         <div>
-          <ProductCard />
+          <ProductCard products={recentOrders.data.data.products} />
         </div>
       </section>
 
@@ -68,7 +72,7 @@ const Homepage = async () => {
         </h1>
 
         <div>
-          <PopularProduct />
+          <PopularProduct products={popularOrders.data.data.products} />
         </div>
       </section>
 

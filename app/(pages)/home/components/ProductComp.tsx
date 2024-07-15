@@ -8,9 +8,10 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { getProductsByCategories } from "@/app/helpers/Apihelper";
+import { addToCart, getProductsByCategories } from "@/app/helpers/Apihelper";
 import { MouseEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
 
 // Define the type for the props
 interface ProductsProps {
@@ -36,6 +37,31 @@ const ProductComponent: React.FC<ProductsProps> = ({ name }) => {
     //@ts-ignore
     if (e.target.className.includes("addToCart")) {
       console.log("added to cart");
+      // Add item to cart
+
+      // Adding Item to Cart
+      const items: any = {
+        item: { product: id, quantity: 1 },
+      };
+
+      const addItemToCart = async () => {
+        try {
+          const res = await addToCart(items);
+          // console.log(res.data.message);
+          SuccessToast(res.data.message);
+          // router.refresh();
+          //Force a hard reload to clear the cache if supported by the browser
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } catch (error: any) {
+          console.log(error);
+          // ErrorToast(error.response.data.error);
+          ErrorToast("You're not logged In. Click on Account, to Login");
+        }
+      };
+
+      addItemToCart();
     } else {
       router.push(`/product/${id}`);
       // console.log("hello")

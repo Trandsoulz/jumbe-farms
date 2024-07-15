@@ -14,8 +14,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Jumbo Farms",
-  description: "Shop of Jumbo farms",
+  title: "Jumbo Fresh Farm Products",
+  description: "e-commerce of Jumbo Fresh Farm Products",
 };
 
 export default function RootLayout({

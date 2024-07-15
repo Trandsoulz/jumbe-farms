@@ -47,9 +47,23 @@ export const updateAddress = async (payload: any) => {
 };
 
 export const getCategories = async () => {
-  const res = await axios.get(`${api}/category`);
+  try {
+    const res = await axios.get(`${api}/category`);
 
-  return res;
+    return res;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getProducts = async () => {
+  try {
+    const res = await axios.get(`${api}/product`);
+    
+    return res;
+  } catch (err) {
+    throw err;
+  }
 };
 
 export const getProductsByCategories = async (url: string) => {

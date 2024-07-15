@@ -38,7 +38,8 @@ const Cart = () => {
   const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
 
   const router = useRouter();
-  const publicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY;
+  const testPublicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY;
+  const publicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY_LIVE;
 
   const fetchCartInCart = async () => {
     try {
@@ -139,7 +140,7 @@ const Cart = () => {
   // Paystack
   const componentProps = {
     email: user?.email,
-    amount: totalPrice * 100,
+    amount: totalPrice * 100, // Convert from kobo naira
     metadata: {
       name: user?.name,
       // number: "08113848299",
@@ -148,7 +149,7 @@ const Cart = () => {
     text: "Check Out",
     onSuccess: () => createUserOrder(),
     // SuccessToast("Thanks for doing business with us! Come back soon!!"),
-    onClose: () => ErrorToast("Wait! Don't leave "),
+    onClose: () => ErrorToast("We're sorry your order wasn't successful."),
   };
 
   const config = {
