@@ -110,6 +110,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
       console.log(error);
       // ErrorToast(error.response.data.error);
       ErrorToast("You're not logged In. Click on Account, to Login");
+      window.location.href = "/login";
     }
   };
 
@@ -122,6 +123,7 @@ const ProductPageComponent: React.FC<ProductProps> = ({ product }) => {
     } catch (error: any) {
       console.log(error);
       ErrorToast("You're not logged In. Click on Account, to Login");
+      window.location.href = "/login";
     }
   };
 

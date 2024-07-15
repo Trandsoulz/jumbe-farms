@@ -14,6 +14,8 @@ import {
 import AutoScroll from "embla-carousel-auto-scroll";
 import { useRouter } from "next/navigation";
 import { MouseEvent } from "react";
+import { addToCart } from "@/app/helpers/Apihelper";
+import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
 
 interface ProductsProp {
   products: any[];
@@ -26,6 +28,32 @@ const ProductCard: React.FC<ProductsProp> = ({ products }) => {
     //@ts-ignore
     if (e.target.className.includes("addToCart")) {
       console.log("added to cart");
+      // Add item to cart
+
+      // Adding Item to Cart
+      const items: any = {
+        item: { product: id, quantity: 1 },
+      };
+
+      const addItemToCart = async () => {
+        try {
+          const res = await addToCart(items);
+          // console.log(res.data.message);
+          SuccessToast(res.data.message);
+          // router.refresh();
+          //Force a hard reload to clear the cache if supported by the browser
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } catch (error: any) {
+          console.log(error);
+          // ErrorToast(error.response.data.error);
+          ErrorToast("You're not logged In. Click on Account, to Login");
+          window.location.href = "/login";
+        }
+      };
+
+      addItemToCart();
     } else {
       router.push(`/product/${id}`);
       // console.log("hello")

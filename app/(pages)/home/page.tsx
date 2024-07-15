@@ -72,7 +72,7 @@ const Homepage = async () => {
         </h1>
 
         <div>
-          <PopularProduct products={popularOrders.data.data.products} />
+          <ProductCard products={popularOrders.data.data.products} />
         </div>
       </section>
 
