@@ -59,7 +59,7 @@ export const getCategories = async () => {
 export const getProducts = async () => {
   try {
     const res = await axios.get(`${api}/product`);
-    
+
     return res;
   } catch (err) {
     throw err;
@@ -79,9 +79,13 @@ export const getProductById = async (id: string) => {
 };
 
 export const searchProduct = async (id: string) => {
-  const res = await axios.get(`${api}/search?query=${id}`);
+  try {
+    const res = await axios.get(`${api}/search?query=${id}`);
 
-  return res;
+    return res;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const fetchCart = async () => {

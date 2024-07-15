@@ -46,10 +46,14 @@ const ProductCard: React.FC<ProductsProp> = ({ products }) => {
             window.location.reload();
           }, 2000);
         } catch (error: any) {
-          console.log(error);
-          // ErrorToast(error.response.data.error);
-          ErrorToast("You're not logged In. Click on Account, to Login");
-          window.location.href = "/login";
+          if (error.response.data.message === "Item already in cart") {
+            ErrorToast(error.response.data.message);
+            // console.log(error.response.data.message);
+          } else {
+            // ErrorToast(error.response.data.error);
+            ErrorToast("You're not logged In. Click on Account, to Login");
+            window.location.href = "/login";
+          }
         }
       };
 

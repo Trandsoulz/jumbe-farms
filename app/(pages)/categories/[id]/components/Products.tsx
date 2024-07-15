@@ -1,5 +1,7 @@
 "use client";
 
+import { addToCart } from "@/app/helpers/Apihelper";
+import { ErrorToast, SuccessToast } from "@/app/helpers/Toast";
 import { Rate } from "antd";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,6 +31,36 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
     //@ts-ignore
     if (e.target.className.includes("addToCart")) {
       console.log("added to cart");
+      // Add item to cart
+
+      // Adding Item to Cart
+      const items: any = {
+        item: { product: id, quantity: 1 },
+      };
+
+      const addItemToCart = async () => {
+        try {
+          const res = await addToCart(items);
+          // console.log(res.data.message);
+          SuccessToast(res.data.message);
+          // router.refresh();
+          //Force a hard reload to clear the cache if supported by the browser
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        } catch (error: any) {
+          if (error.response.data.message === "Item already in cart") {
+            ErrorToast(error.response.data.message);
+            // console.log(error.response.data.message);
+          } else {
+            // ErrorToast(error.response.data.error);
+            ErrorToast("You're not logged In. Click on Account, to Login");
+            window.location.href = "/login";
+          }
+        }
+      };
+
+      addItemToCart();
     } else {
       router.push(`/product/${id}`);
       // console.log("hello")
@@ -73,7 +105,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
                   {name}
                 </h1>
                 <h1>
-                {size >= .001 && `${size}kg`} {variant}
+                  {size >= 0.001 && `${size}kg`} {variant}
                 </h1>
                 <p className="text-sm md:text-base">
                   {" "}
