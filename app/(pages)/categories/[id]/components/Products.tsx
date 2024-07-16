@@ -10,8 +10,8 @@ import { MouseEvent } from "react";
 
 // Define the type for the props
 interface ProductsProps {
-  id: string;
-  products: any;
+  id?: string;
+  products?: any;
 }
 interface productType {
   images: string[];

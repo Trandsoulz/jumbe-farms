@@ -80,7 +80,7 @@ export const getProductById = async (id: string) => {
 
 export const searchProduct = async (id: string) => {
   try {
-    const res = await axios.get(`${api}/search?query=${id}`);
+    const res = await axios.get(`${api}/product/search?query=${id}`);
 
     return res;
   } catch (error) {
