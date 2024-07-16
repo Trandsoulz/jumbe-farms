@@ -133,7 +133,7 @@ const Search = () => {
       {products ? (
         <>
           <h1 className="text-center md:text-2xl text-base p-8">
-            Showing Results of "{queryWord}"
+            Showing Results of &quot;{queryWord}&quot;
           </h1>
 
           <Products products={products} />
