@@ -69,7 +69,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
 
   return (
     <main className="max-w-[90rem] grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto w-[90%] md:w-[95%]">
-      {products.map(
+      {products?.map(
         ({ images, name, price, size, _id, variant }: productType) => (
           <div
             className="flex flex-col cursor-pointer md:flex-row p-2 md:p-4 gap-2 md:gap-4 border-2 border-primaryColor1/60 hover:border-primaryColor active:border-primaryColor2 rounded-lg w-fit mb-4"

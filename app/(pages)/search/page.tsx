@@ -135,7 +135,7 @@ const Search = () => {
             </div> */}
       </main>
 
-      {products ? (
+      {products?.length !== 0 ? (
         <>
           <h1 className="text-center md:text-2xl text-base p-8">
             Showing Results of &quot;{queryWord}&quot;
