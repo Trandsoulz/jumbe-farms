@@ -70,7 +70,7 @@ const Account = () => {
               You are unauthorised. Try refreshing the page.
             </h1>
             <p className="text-base">
-              If the issue persists, then go to the Login page
+              If the issue persists, try to logout then go to the Login page
             </p>
           </main>
         )}

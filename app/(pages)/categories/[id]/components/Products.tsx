@@ -56,7 +56,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
           } else {
             // ErrorToast(error.response.data.error);
             ErrorToast("You're not logged In. Click on Account, to Login");
-            window.location.href = "/login";
+            // window.location.href = "/login";
           }
         }
       };
