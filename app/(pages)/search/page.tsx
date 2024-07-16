@@ -22,7 +22,7 @@ const Search = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
-  const [products, setProducts] = useState<any[]>();
+  const [products, setProducts] = useState<any>(null);
   const [categories, setCategories] = useState<any[]>();
 
   // Functionality for the search query
@@ -75,6 +75,7 @@ const Search = () => {
 
     getCategoriesForSearch();
     searchProductFunc(queryWord); // queryWord, is to get the query from the url
+    console.log(products);
   }, []);
 
   // console.log("This is the categories", categories);
@@ -135,50 +136,13 @@ const Search = () => {
             </div> */}
       </main>
 
-      {products?.length !== 0 ? (
+      {products && (
         <>
           <h1 className="text-center md:text-2xl text-base p-8">
             Showing Results of &quot;{queryWord}&quot;
           </h1>
 
           <Products products={products} />
-        </>
-      ) : (
-        <>
-          <h1 className="text-center md:text-2xl text-base p-8">
-            Browse through our popular categories
-          </h1>
-          <main className="max-w-[90rem] mb-6 overflow-x-scroll w-[90%] mx-auto pb-8">
-            <section className="max-w-[90rem] flex gap-10">
-              {categories &&
-                categories.map(({ _id, image, name }) => (
-                  <Link href={`/categories/${name}`} key={_id}>
-                    <div className="w-[250px]">
-                      {image ? (
-                        <Image
-                          src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${image}`}
-                          width={270}
-                          height={250}
-                          alt={`${name}`}
-                          className="w-[250px] bg-slate-500"
-                        />
-                      ) : (
-                        <Image
-                          src={`/assets/jumbo-ad1.jpg`}
-                          width={270}
-                          height={250}
-                          alt={`${name}`}
-                          className="w-[250px] bg-slate-500"
-                        />
-                      )}
-                      <h1 className=" w-full text-whtie font-medium text-xl text-white bg-primaryColor1 p-4 text-center capitalize">
-                        {name}
-                      </h1>
-                    </div>
-                  </Link>
-                ))}
-            </section>
-          </main>
         </>
       )}
 
