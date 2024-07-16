@@ -25,18 +25,8 @@ const Search = () => {
   const [products, setProducts] = useState<any[]>();
   const [categories, setCategories] = useState<any[]>();
 
-  // Search Product Functionality
-  const searchProductByQuery = async (id: string) => {
-    // Set the query
-    const params = new URLSearchParams(searchParams);
-    params.set("query", id); // id is the query input we're searching
-
-    // Set the params and push it to the url
-    const queryString = params.toString();
-    const updatedPath = queryString ? `${pathname}?${queryString}` : pathname;
-    router.push(updatedPath);
-
-    // Functionality for the search query
+  // Functionality for the search query
+  const searchProductFunc = async (id: string) => {
     try {
       setLoading(true);
       const res = await searchProduct(id); // id is the query input we're searching
@@ -49,6 +39,21 @@ const Search = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Search Product Functionality By Query
+  const searchProductByQuery = async (id: string) => {
+    // Set the query
+    const params = new URLSearchParams(searchParams);
+    params.set("query", id); // id is the query input we're searching
+
+    // Set the params and push it to the url
+    const queryString = params.toString();
+    const updatedPath = queryString ? `${pathname}?${queryString}` : pathname;
+    router.push(updatedPath);
+
+    // Functionality for the search query
+    searchProductFunc(id); // id is the query input we're searching
   };
 
   useEffect(() => {
@@ -69,7 +74,7 @@ const Search = () => {
     };
 
     getCategoriesForSearch();
-    searchProductByQuery(queryWord); // queryWord, is to get the query from the url
+    searchProductFunc(queryWord); // queryWord, is to get the query from the url
   }, []);
 
   // console.log("This is the categories", categories);
