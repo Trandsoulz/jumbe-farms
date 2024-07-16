@@ -56,8 +56,10 @@ const Login = () => {
           // Redirect to account page
           // router.replace("/account");
           // window.location.pathname = "/account";
-
           window.history.go(-1);
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         } else {
           throw new Error("Failed to set authentication token.");
         }

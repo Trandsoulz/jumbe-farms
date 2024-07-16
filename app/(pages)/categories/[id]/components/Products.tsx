@@ -49,6 +49,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
             window.location.reload();
           }, 2000);
         } catch (error: any) {
+          console.log(error)
           if (error.response.data.message === "Item already in cart") {
             ErrorToast(error.response.data.message);
             // console.log(error.response.data.message);

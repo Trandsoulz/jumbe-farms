@@ -207,7 +207,10 @@ const Cart = () => {
                         className="border-2 border-primaryColor1 flex gap-4"
                         key={_id}
                       >
-                        <div className="w-[35%]">
+                        <div
+                          className="w-[35%] cursor-pointer"
+                          onClick={() => router.push(`/product/${product._id}`)}
+                        >
                           {/* <Image
               src={"/assets/jumbo-ad1.jpg"}
               alt={"item-1"}
