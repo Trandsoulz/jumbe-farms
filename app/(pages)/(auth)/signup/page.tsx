@@ -48,13 +48,13 @@ const Signup = () => {
       const token = res?.data?.data?.token;
       setCookie("x-auth-token", `${token}`);
 
-      // router.refresh();
+      // router.back();
       // window.location.pathname = "/account";
 
       window.history.go(-2);
-      setTimeout(() => {
-        window.location.reload();
-      }, 500);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 500);
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");

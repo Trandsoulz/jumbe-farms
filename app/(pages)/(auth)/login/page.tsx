@@ -40,32 +40,34 @@ const Login = () => {
       const res = await logUser(loginDetails);
       console.log(res);
 
+      setLoading("Redirecting...");
+      SuccessToast("Welcome Back");
+
       // Get bearer token from response and set it to cookies
       const token = res?.data?.data?.token;
+      setCookie("x-auth-token", token);
 
       // Ensure the token is present
-      if (token) {
-        setCookie("x-auth-token", token);
+      // if (token) {
 
-        // Verify if the cookie is set correctly
-        const cookieToken = getCookie("x-auth-token");
-        if (cookieToken) {
-          setLoading("Redirecting...");
-          SuccessToast("Welcome Back");
+      // Verify if the cookie is set correctly
+      // const cookieToken = getCookie("x-auth-token");
+      // if (cookieToken) {
 
-          // Redirect to account page
-          // router.replace("/account");
-          // window.location.pathname = "/account";
-          window.history.go(-1);
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
-        } else {
-          throw new Error("Failed to set authentication token.");
-        }
-      } else {
-        throw new Error("Invalid login response: Token not found.");
-      }
+      // Redirect to account page
+      router.back();
+      // window.location.pathname = "/account";
+      // window.history.go(-1);
+      // setTimeout(() => {
+        // window.location.reload();
+      // }, 500);
+      // }
+      //   } else {
+      //     throw new Error("Failed to set authentication token.");
+      //   }
+      // } else {
+      //   throw new Error("Invalid login response: Token not found.");
+      // }
     } catch (errMessage: any) {
       console.error(errMessage);
       setLoading("Submit");
