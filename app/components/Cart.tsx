@@ -29,17 +29,31 @@ import { useRouter } from "next/navigation";
 import { ErrorToast, SuccessToast } from "../helpers/Toast";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { useCartIdStore } from "../store/Store";
+import CartItem from "./CartItem";
+import Address from "./Address";
+import Confirmation from "./Confirmation";
 
 const Cart = () => {
   const { setCartId } = useCartIdStore();
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [user, setUser] = useState<any>();
-  const [loading, setLoading] = useState<{ [key: string]: boolean }>({});
 
-  const router = useRouter();
-  const testPublicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY;
-  const publicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY_LIVE;
+  // This is the address for the delivery that'll be passed as props to the confirmation page
+  const [globalAddress, setGlobalAddress] = useState({
+    full_name: "",
+    street: "",
+    city: "",
+    state: "",
+    tel: "",
+    tel_2: "",
+  });
+
+  const [orderState, setOrderState] = useState<string>("cart");
+
+  const publicKey = process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY;
+  const test_publicKey =
+    process.env.NEXT_PUBLIC_JUMBO_FARM_PAYSTACK_PUBLIC_KEY_LIVE;
 
   const fetchCartInCart = async () => {
     try {
@@ -72,68 +86,33 @@ const Cart = () => {
     fetchCartLists();
   }, [fetchCartLists]);
 
-  // Increment Item in the cart
-  const incrementItem = async (id: string, amount: number) => {
-    try {
-      const res = await incrementCurrentItem(id, amount);
-      console.log(res);
-      setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
-      await fetchCartInCart();
-      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-    } catch (error) {
-      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-      console.log(error);
-    }
-  };
-  // Decrement Item in the cart
-  const decrementItem = async (id: string, amount: number) => {
-    try {
-      const res = await decrementCurrentItem(id, amount);
-      console.log(res);
-      setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
-      await fetchCartInCart();
-      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-    } catch (error) {
-      setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-      console.log(error);
-    }
-  };
-
-  // Delete Item in the cart
-  const deleteItem = async (id: string) => {
-    try {
-      const res = await deleteCartItem(id);
-      console.log(res);
-      // setLoading((prevLoading) => ({ ...prevLoading, [id]: true }));
-      await fetchCartInCart();
-      // setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-    } catch (error) {
-      // setLoading((prevLoading) => ({ ...prevLoading, [id]: false }));
-      console.log(error);
-    }
-  };
-
   // Create Order & Delete Cart
   const createUserOrder = async () => {
     try {
       const order = {
+        ...globalAddress,
         items: cart,
         totalPrice,
       };
+
+      console.log("This is the ", order);
       const res = await createOrder(order);
       const deletedCart = await deleteCart();
       console.log("This is the cart that has been deleted ", deletedCart);
       console.log("This is the order ", res);
 
       // Set Success Toast.
-      SuccessToast("Thanks for doing business with us! Come back soon!!");
+      SuccessToast(
+        "Thanks for doing business with us! Check your mail for your reciept and come back soon!!"
+      );
 
       // Reload page
       setTimeout(() => {
         window.location.reload();
-      }, 1000);
-    } catch (error) {
+      }, 3000);
+    } catch (error: any) {
       console.log(error);
+      ErrorToast(error.response.data.message);
     }
   };
 
@@ -146,40 +125,40 @@ const Cart = () => {
       // number: "08113848299",
     },
     publicKey,
-    text: "Check Out",
+    text: "Pay Now",
     onSuccess: () => createUserOrder(),
     // SuccessToast("Thanks for doing business with us! Come back soon!!"),
     onClose: () => ErrorToast("We're sorry your order wasn't successful."),
   };
 
-  const config = {
-    email: user?.email,
-    amount: totalPrice * 100,
-    metadata: {
-      name: user?.name,
-      // number: "08113848299",
-    },
-    publicKey,
-    text: "Check Out",
-  };
+  // const config = {
+  //   email: user?.email,
+  //   amount: totalPrice * 100,
+  //   metadata: {
+  //     name: user?.name,
+  //     // number: "08113848299",
+  //   },
+  //   publicKey,
+  //   text: "Check Out",
+  // };
 
-  // you can call this function anything
-  const onSuccess = () => {
-    SuccessToast("Thanks for doing business with us! Come back soon!!");
-    console.log("Thanks for doing business with us! Come back soon!!");
-    // Implementation for whatever you want to do with reference and after success call.
-    // console.log(reference);
-  };
+  // // you can call this function anything
+  // const onSuccess = () => {
+  //   SuccessToast("Thanks for doing business with us! Come back soon!!");
+  //   console.log("Thanks for doing business with us! Come back soon!!");
+  //   // Implementation for whatever you want to do with reference and after success call.
+  //   // console.log(reference);
+  // };
 
-  // you can call this function anything
-  const onClose = () => {
-    ErrorToast("Wait! Don't leave");
-    // implementation for  whatever you want to do when the Paystack dialog closed.
-    // console.log("closed");
-  };
+  // // you can call this function anything
+  // const onClose = () => {
+  //   ErrorToast("Wait! Don't leave");
+  //   // implementation for  whatever you want to do when the Paystack dialog closed.
+  //   // console.log("closed");
+  // };
 
-  // @ts-ignore
-  const initializePayment = usePaystackPayment(config);
+  // // @ts-ignore
+  // const initializePayment = usePaystackPayment(config);
 
   return (
     <>
@@ -191,101 +170,31 @@ const Cart = () => {
         </SheetTrigger>
         <SheetContent className="w-[90%] overflow-y-scroll">
           <SheetHeader>
-            <SheetTitle>Your Cart</SheetTitle>
+            <SheetTitle>
+              {orderState === "cart"
+                ? "Your Cart"
+                : orderState === "address"
+                ? "Your Address"
+                : orderState === "confirmation"
+                ? "Confirm Your Order"
+                : ""}
+            </SheetTitle>
             <SheetDescription className="text-black text-md">
-              {cart.length !== 0 ? (
-                <main>
-                  <section className="border-2 border-primaryColor1 p-1 my-3">
-                    <h1>
-                      Total Price : ₦{totalPrice.toLocaleString("en-US")}{" "}
-                    </h1>
-                  </section>
-
-                  <section className="cart space-y-5">
-                    {cart.map(({ product, quantity, _id }: any) => (
-                      <div
-                        className="border-2 border-primaryColor1 flex gap-4"
-                        key={_id}
-                      >
-                        <div
-                          className="w-[35%] cursor-pointer"
-                          onClick={() => router.push(`/product/${product._id}`)}
-                        >
-                          {/* <Image
-              src={"/assets/jumbo-ad1.jpg"}
-              alt={"item-1"}
-              width={150}
-              height={100}
-              className="w-full"
-              priority
-            /> */}
-
-                          {product.images.length === 0 ? (
-                            <Image
-                              src={`/assets/jumbo-ad1.jpg`}
-                              alt={`image of ${product.name}`}
-                              priority
-                              height={100}
-                              width={150}
-                              className="w-full"
-                            />
-                          ) : (
-                            <Image
-                              src={`https://jumbofarmsbucket.s3.eu-central-1.amazonaws.com/${product.images[0]}`}
-                              alt={`image of ${product.name}`}
-                              priority
-                              height={100}
-                              width={150}
-                              className="w-full"
-                            />
-                          )}
-                        </div>
-                        <div className="py-2 space-y-2 w-[65%]">
-                          <h1>{`${product.name} [${product.size}kg]`}</h1>
-                          <h1>₦{`${product.price.toLocaleString("en-US")}`}</h1>
-                          <div className=" flex justify-between h-auto items-center pr-4">
-                            <div className="border-2 border-primaryColor1 flex text-center w-fit">
-                              <button
-                                className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30 active:bg-primaryColor2"
-                                disabled={quantity <= 1 || loading[product._id]}
-                                onClick={() => decrementItem(product._id, 1)}
-                              >
-                                <FaMinus />
-                              </button>
-                              <Separator orientation="vertical" />
-                              <h1 className="w-[25px] text-center flex justify-center">
-                                {" "}
-                                {loading[product._id] ? (
-                                  <AiOutlineLoading className="animate-spin my-1" />
-                                ) : (
-                                  quantity
-                                )}{" "}
-                              </h1>
-                              <Separator orientation="vertical" />
-                              <button
-                                className="w-[25px] flex justify-center h-auto items-center bg-primaryColor1 text-white disabled:opacity-30 active:bg-primaryColor2"
-                                disabled={
-                                  quantity >= 15 || loading[product._id]
-                                }
-                                onClick={() => incrementItem(product._id, 1)}
-                              >
-                                <FaPlus />
-                              </button>
-                            </div>
-                            <button>
-                              <RiDeleteBinLine
-                                className="text-primaryColor1 text-xl"
-                                onClick={() => deleteItem(product._id)}
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </section>
-                </main>
+              {orderState === "cart" ? (
+                <CartItem setMainCart={setCart} />
+              ) : orderState === "address" ? (
+                <Address
+                  setGlobalAddress={setGlobalAddress}
+                  globalAddress={globalAddress}
+                />
+              ) : orderState === "confirmation" ? (
+                <Confirmation
+                  address={globalAddress}
+                  totalPrice={totalPrice}
+                  cart={cart}
+                />
               ) : (
-                <h1>Your cart is empty</h1>
+                ""
               )}
             </SheetDescription>
           </SheetHeader>
@@ -298,23 +207,67 @@ const Cart = () => {
             //   Checkout Now
             // </button>
             <SheetFooter>
-              <SheetClose asChild>
-                {/* @ts-ignore */}
-                {/* <button
+              {orderState === "cart" ? (
+                // This button will show when your in the cart component
+                <button
+                  className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4"
+                  onClick={() => setOrderState("address")}
+                >
+                  Confirm Your Order
+                </button>
+              ) : orderState === "address" ? (
+                // This button will show when your in the address component
+                <div className="flex justify-between gap-5 w-full">
+                  <button
+                    className="bg-primaryColor1 text-white mt-5 text-xl w-1/2 py-4"
+                    onClick={() => setOrderState("cart")}
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="bg-primaryColor1 text-white mt-5 text-xl w-1/2 py-4"
+                    onClick={() => setOrderState("confirmation")}
+                  >
+                    Check Out
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+
+              {/* @ts-ignore */}
+              {/* <button
                   onClick={() => {
                     // @ts-ignore
                     initializePayment(onSuccess, onClose);
-                  }}
+                    }}
                   className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4"
                 >
                   Check Out
                 </button> */}
 
-                <button className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4">
-                  {/* @ts-ignore */}
+              {orderState === "confirmation" && (
+                // This button will show when your in the confirmations component
+                <div className="flex justify-between gap-5 w-full">
+                  <button
+                    className="bg-primaryColor1 text-white mt-5 text-xl w-1/2 py-4"
+                    onClick={() => setOrderState("address")}
+                  >
+                    Back
+                  </button>
+                  <SheetClose asChild className="w-1/2">
+                    <button className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4">
+                      {/* @ts-ignore */}
+                      <PaystackButton {...componentProps} />
+                    </button>
+                  </SheetClose>
+                </div>
+              )}
+
+              {/* <button className="bg-primaryColor1 text-white mt-5 text-xl w-full py-4">
+                  @ts-ignore
                   <PaystackButton {...componentProps} />
-                </button>
-              </SheetClose>
+                </button> */}
             </SheetFooter>
           )}
           {/* <Link href={"/checkout"} className="bg-primaryColor1 absolute left-0 text-center text-white text-xl font-medium right-0 p-6 bottom-0">Checkout Now</Link> */}

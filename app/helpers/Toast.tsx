@@ -17,7 +17,7 @@ export const SuccessToast = (ToastMessage: string) => {
 
 export const ErrorToast = (ToastMessage: string) => {
   toast.error(`${ToastMessage}`, {
-    duration: 3000,
+    duration: 2000,
     style: {
       border: "1px solid #ff5555",
       padding: "16px",
