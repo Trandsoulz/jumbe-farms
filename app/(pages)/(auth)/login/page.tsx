@@ -55,12 +55,12 @@ const Login = () => {
       // if (cookieToken) {
 
       // Redirect to account page
-      router.back();
+          // router.back();
       // window.location.pathname = "/account";
-      // window.history.go(-1);
-      // setTimeout(() => {
-        // window.location.reload();
-      // }, 500);
+      window.history.go(-1);
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
       // }
       //   } else {
       //     throw new Error("Failed to set authentication token.");
